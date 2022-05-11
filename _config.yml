@@ -19,10 +19,10 @@ email: "contact@pntaylor.net"
 description: A blog for taking my own name in vain
 baseurl: # the optional subpath of your site, e.g. "/blog"
 url: "https://pn-taylor.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
-author: Pete
-#  name: Peter Taylor
-#  twitter: pntaylor
-#  picture: /assets/images/newer_avatar.jpg
+author: 
+  name: Pete
+  twitter: pntaylor
+  picture: /assets/images/newer_avatar.jpg
 twitter_username: pntaylor
 github_username: pn-taylor
 logo: # path of site logo, e.g. "/assets/images/logo.png"
