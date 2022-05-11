@@ -1,4 +1,4 @@
 ---
-layout: home
+layout: about
 ---
 To be written
