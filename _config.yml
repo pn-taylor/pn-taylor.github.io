@@ -15,10 +15,10 @@
 # in the templates via {{ site.myvariable }}.
 lang: en-GB
 title: For Pete's Sake
-email: contact@pntaylor.net
+email: "contact@pntaylor.net"
 description: A blog for taking my own name in vain
 baseurl: # the optional subpath of your site, e.g. "/blog"
-url: https://pn-taylor.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url: "https://pn-taylor.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 author: Pete
   name: Peter Taylor
   twitter: pntaylor
