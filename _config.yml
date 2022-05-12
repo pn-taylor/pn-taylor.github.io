@@ -22,7 +22,7 @@ url: "https://pn-taylor.github.io" # the base hostname & protocol for your site 
 author: 
   name: Pete
   twitter: pntaylor
-  picture: /assets/images/newer_avatar.jpg
+  picture: /assets/images/avatar.jpg
 twitter_username: pntaylor
 github_username: pn-taylor
 logo: # path of site logo, e.g. "/assets/images/logo.png"
