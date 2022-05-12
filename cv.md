@@ -1,3 +1,4 @@
 ---
 layout: cv
+title: CV
 ---
