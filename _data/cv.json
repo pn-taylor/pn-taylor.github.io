@@ -182,16 +182,6 @@
       "keywords": []
     },
     {
-      "name": "Dalet",
-      "level": "",
-      "keywords": []
-    },
-    {
-      "name": "GPET",
-      "level": "",
-      "keywords": []
-    },
-    {
       "name": "Active Directory",
       "level": "",
       "keywords": []
@@ -351,14 +341,6 @@
     {
       "language": "English",
       "fluency": "Native Speaker"
-    },
-    {
-      "fluency": "Elementary",
-      "language": "French"
-    },
-    {
-      "fluency": "Elementary",
-      "language": "Swedish"
     }
   ],
   "references": [
@@ -375,7 +357,6 @@
       "reference": "Peter was always a willing and technically competent support engineer who provided a good server to my business in Russia using our remote management systems."
     }
   ],
-  "projects": [],
   "meta": {
     "version": "v1.0.0",
     "canonical": "https://github.com/jsonresume/resume-schema/blob/v1.0.0/schema.json"
