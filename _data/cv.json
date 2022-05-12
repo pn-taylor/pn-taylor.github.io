@@ -2,7 +2,6 @@
   "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
   "basics": {
     "name": "Peter Taylor",
-    "label": "ICT Manager at WildBear Entertainment",
     "image": "/assets/images/avatar.jpg",
     "url": "https://pn-taylor.github.io",
     "summary": "IT Manager with experience working in Education, Entertainment, Law, Oil & Gas and Governmental organisations. I have worked within an Active Directory domain as well as experience with Exchange, document management systems, time management software plus many different helpdesk systems. My experience so far has been a mix of on-site and remote assistance with users at home and abroad.\n\nSpecialties: Telephone manner, remote diagnostics, call recording, logical diagnosis, networking, Spiceworks administration",
