@@ -1,3 +1,6 @@
+---
+category: General
+---
 This reminds me a lot of when I used to mess around with websites in the late 90's early 00's. It seemed that no sooner had I built a website using something, I found something else that either did more or was far more interesting to use. Eventually I settled, like a fair chunk of the internet, on using WordPress. Now, this isn't a slight on WordPress at all, it's a great product, has a lot of additional features that allows plebs like myself to build a cohesive website very, very quickly.
 
 That being said, however, if all you're using it for is to splurge your brain farts online so that those unfortunate enough to come across your website can read them then, in a lot of cases I feel, it's a bit too much for the use case. It's also a prime subject for random bots to try and brute force their way into the admin console and so you need to secure your site with various plugins and features less your glorious posts be defaced. Even my weird corner of the web was subject, almost instantly, to attempts to login to the admin page upon completion of it's install. Why, who knows, but it was irritating all the same.
