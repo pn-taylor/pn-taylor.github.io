@@ -4,8 +4,8 @@
     "name": "Peter Taylor",
     "label": "ICT Manager at WildBear Entertainment",
     "image": "",
-    "email": "linkedin at pntaylor.net",
-    "url": "",
+    "email": "linkedin@pntaylor.net",
+    "url": "https://pn-taylor.github.io",
     "summary": "IT Manager with experience working in Education, Entertainment, Law, Oil & Gas and Governmental organisations. I have worked within an Active Directory domain as well as experience with Exchange, document management systems, time management software plus many different helpdesk systems. My experience so far has been a mix of on-site and remote assistance with users at home and abroad.\n\nSpecialties: Telephone manner, remote diagnostics, call recording, logical diagnosis, networking, Spiceworks administration",
     "location": {
       "countryCode": "US",
@@ -29,7 +29,6 @@
       "name": "WildBear Entertainment",
       "position": "ICT Manager",
       "startDate": "2017-07-31",
-      "endDate": "",
       "highlights": [],
       "url": "https://www.linkedin.com/company/wildbear-entertainment/",
       "location": "Canberra, Australia"
@@ -38,10 +37,8 @@
       "name": "Self-Employed",
       "position": "Freelance Games Reviewer",
       "startDate": "2015-11-30",
-      "endDate": "",
       "highlights": [],
-      "summary": "Writing reviews for the latest releases for the gaming section of The Digital Fix (https://www.thedigitalfix.com/), Digital Chumps (https://digitalchumps.com) and Jump Dash Roll (https://www.jumpdashroll.com). Specific formats I review for are currently PC, XBox and Switch. These reviews are written in my spare time and requires an ability to critically asses game titles and commit these thoughts in a clear and concise manner.",
-      "url": ""
+      "summary": "Writing reviews for the latest releases for the gaming section of The Digital Fix (https://www.thedigitalfix.com/), Digital Chumps (https://digitalchumps.com) and Jump Dash Roll (https://www.jumpdashroll.com). Specific formats I review for are currently PC, XBox and Switch. These reviews are written in my spare time and requires an ability to critically asses game titles and commit these thoughts in a clear and concise manner."
     },
     {
       "name": "Marist College Canberra",
@@ -87,8 +84,7 @@
       "startDate": "2008-07-31",
       "endDate": "2011-08-31",
       "highlights": [],
-      "summary": "Proposing, implementing and maintaining a small office network\nFirst point of contact for all user issues\nTroubleshooting remotely and on site as required\nWrite and implement IT and data security policies as required.",
-      "url": ""
+      "summary": "Proposing, implementing and maintaining a small office network\nFirst point of contact for all user issues\nTroubleshooting remotely and on site as required\nWrite and implement IT and data security policies as required."
     },
     {
       "name": "Steria Ltd",
@@ -128,16 +124,16 @@
       "endDate": "2015-08-31",
       "summary": "Administration of the Football Club as well organise bookings for social events and training. Often the first point of contact by external agencies who wish to liaise with our club and frequently required dealing with the local Football Federation.",
       "highlights": [],
-      "url": ""
+      "url": "http://www.lanyonunited.org"
     },
     {
       "organization": "Lanyon United Football Club",
       "position": "Treasurer",
       "startDate": "2018-10-31",
       "endDate": "2019-10-31",
-      "summary": null,
+      "summary": "Looking after the day-to-day finances and expenditure of a social football including balance mangement, invoicing and maintaining financial records",
       "highlights": [],
-      "url": ""
+      "url": "http://www.lanyonunited.org"
     }
   ],
   "education": [
@@ -164,12 +160,10 @@
   "certificates": [
     {
       "name": "ITILv3 Foundation",
-      "issuer": null,
       "startDate": "2011-02-28"
     },
     {
       "name": "CompTIA Network+",
-      "issuer": null,
       "endDate": "2014-07-31",
       "startDate": "2011-07-31"
     }
