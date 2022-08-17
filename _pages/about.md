@@ -1,35 +1,11 @@
 ---
-title: About Journal
-subtitle: A stunning personal blog Jekyll theme with an image-focused design.
-description: A stunning personal blog Jekyll theme with an image-focused design.
-featured_image: /images/demo/demo-portrait.jpg
+title: About Me
+subtitle: A random Yorkshireman making his way in the world.
+description: A random Yorkshireman making his way in the world.
 ---
+## Hello There
+Hello and welcome. I'm a thirty-something ICT Manager, working for a Post-Production company here in Canberra, Australia. I'm a pretty keen gamer who sometimes commits thoughts into a review that appears on [Jump Dash Roll](https://www.jumpdashroll.com). If you want to see all my reviews, I've got a profile over on [Open Critic](https://t.co/kQ3iHLGRIP). There are other strings to my bow though and I do quite enjoy playing Football (or Soccer depending on your locale), cycling and most things tech related.
 
-![](/images/demo/demo-landscape.jpg)
+I've worked in plenty of different places [my CV](https://pn-taylor.github.io/cv.html) has a lot of that information if you're curious as to where I've been which, considering I emigrated to Australia in 2012, in distance terms, I've travelled quite far! I've not really strayed too far from tech support in my career but then figuring out problems is kind of fun and in the role I currently inhibit I've spent plenty of time fixing issues and uplifting what was there; it's been fun to see things change over time.
 
-## Features
-
-Journal is packed with powerful features to showcase your work:
-
-* Beautiful, minimal design
-* Fixed sidebar images that animate as you browse
-* Single column post layout
-* Responsive – works perfectly on all devices
-* Portfolio/projects post type to show your work
-* Blog with pagination
-* Sleek Ajax navigation and page transitions
-* Unique 'gallery' feature for image grids and carousels
-* Built-in contact form with Formspree integration
-* Full markdown support and code highlighting
-* Social media icons
-* Fast page rendering
-* Built with SEO best practices in mind
-* Customize everything – colors, spacing, fonts, sizes etc. – via a simple settings file
-* Works with GitHub Pages
-* Updated and supported by the developers
-
-## Get Index
-
-Journal is created and supported by [Jekyll Themes](https://jekyllthemes.io), and is available for $49.
-
-<a href="https://jekyllthemes.io/theme/journal-personal-jekyll-theme" class="button button--large">Get This Theme</a>
+Outside of work I've two kids under the age of ten and have been married to my awesome wife since 2006 and been her partner in life since 2001. How she's put up with me for over twenty years is a mystery, but I'm just grateful she's still with me. I attempt to play Football most weekends during the winter for a community team here in Canberra called [Lanyon United](http://www.lanyonunited.org) and I'm hoping to get back in the habit of running sometime in the near future in an effort to maybe overturn a PB or two.
