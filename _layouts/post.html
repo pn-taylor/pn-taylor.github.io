@@ -2,17 +2,23 @@
 layout: default
 ---
 
-{% include page-intro.html %}
+<section class="intro">
 
-<main id="main" class="page-content" aria-label="Content">
-  <div class="inner">
-    <article class="entry-wrap">
-      <div class="entry-content">
-        {{ content }}
-      </div>
-      {% if site.disqus.shortname %}
-        {% include disqus_comments.html %}
-      {% endif %}
-    </article>
-  </div>
-</main>
+	<div class="wrap">
+
+		<h1>{{ page.title }}</h1>
+		<p>{{ page.date | date_to_long_string }}</p>
+
+	</div>
+
+</section>
+
+<section class="single">
+
+	<div class="wrap">
+
+		{{ page.content }}
+
+	</div>
+
+</section>
