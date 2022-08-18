@@ -28,7 +28,7 @@ contact_settings:
 
 social_settings:
   facebook_url: ''
-  twitter_url: 'httpd://www.twitter.com/pntaylor'
+  twitter_url: 'https://www.twitter.com/pntaylor'
   instagram_url: ''
   snapchat_url: ''
   youtube_url: ''
