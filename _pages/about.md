@@ -2,7 +2,7 @@
 title: Hello There
 subtitle: A random Yorkshireman making his way in the world.
 description: A random Yorkshireman making his way in the world.
-featured_image: '/images/demo/demo-square.jpg'
+featured_image: '/images/me.jpg'
 ---
 Hello and welcome. I'm a thirty-something ICT Manager, working for a Post-Production company here in Canberra, Australia. I'm a pretty keen gamer who sometimes commits thoughts into a review that appears on [Jump Dash Roll](https://www.jumpdashroll.com). If you want to see all my reviews, I've got a profile over on [Open Critic](https://t.co/kQ3iHLGRIP). There are other strings to my bow though and I do quite enjoy playing Football (or Soccer depending on your locale), cycling and most things tech related.
 
