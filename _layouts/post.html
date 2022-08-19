@@ -21,10 +21,14 @@ layout: default
 
 	</div>
 
+</section>
+
+<section class="single">
+
 	<div class="wrap">
 		{% if site.related_posts.size >= 1 %}
 		<div>
-  			<h3>Related Posts</h3>
+  			<h5>Related Posts</h5>
   			<ul>
   				{% for related_post in site.related_posts limit: 5 %}
     			<li><a href="{{ related_post.url }}">{{ related_post.title }}</a></li>
