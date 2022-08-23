@@ -1,5 +1,5 @@
 ---
-category: General
+category: Sport
 tag: Man Utd
 featured_image: '/images/j_sancho.jpg'
 ---
