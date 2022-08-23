@@ -2,7 +2,7 @@
 category: General
 featured_image: '/images/karijini.jpg'
 ---
-Well, the headline pretty much sums things up rather neatly but it was interesting in a good way. From getting this blog up and running, somewhat properly on GitHub via the use of Jekyll, to crossing off a few projects both at work and at home. There's something rather rewarding about crossing tasks off, even if they're relatively minor ones. I'm also, slowly, getting the hang of how all of this comes together and recently figured out how to add images to the left menu over <-- there.
+Well, the headline pretty much sums things up rather neatly but it was interesting in a good way. From getting this blog up and running, somewhat properly on GitHub via the use of Jekyll, to crossing off a few projects both at work and at home. There's something rather rewarding about crossing tasks off, even if they're relatively minor ones. I'm also, slowly, getting the hang of how all of this comes together and recently figured out how to add images to the left menu.
 
 Beyond the projects though, this week was pretty run of the mill. Having two kids, your week is pretty much the same for the most part. Ferrying to and from school and other things like swimming and dancing. To bed times, meals and so on. It's not often that the routine changes and you tend to fit in the things you want to do, like playing soccer, around that. Whilst that will change somewhat as they get older, I don't see it altering too much other than, potentially, they'll be able to take themselves places eventually.
 
