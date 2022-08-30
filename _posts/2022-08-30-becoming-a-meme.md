@@ -3,6 +3,7 @@ category: Sport
 title: Becoming a Meme
 tag: Formula 1
 featured_image: '/images/abu-dhabi.JPG'
+excerpt: This past weekend's Formula 1 Grand Prix at Spa Francorchamps was pretty much a procession. There was a bit of drama at the start with Lewis Hamilton squeezing Alonso a touch too much causing his Mercedes' rear-end to be launched into the air and his ex-Mercedes teammate, Valterri Bottas, beaching himself in the gravel trying to avoid an accident. Once the safety car period had ended, Max Verstappen proceeded to scyth his way through the field and taking a win that, despite starting from the rear of the grid, even the pundits gave short odds on
 ---
 This past weekend's Formula 1 Grand Prix at Spa Francorchamps was pretty much a procession. There was a bit of drama at the start with Lewis Hamilton squeezing Alonso a touch too much causing his Mercedes' rear-end to be launched into the air and his ex-Mercedes teammate, Valterri Bottas, beaching himself in the gravel trying to avoid an accident. Once the safety car period had ended, Max Verstappen proceeded to scyth his way through the field and taking a win that, despite starting from the rear of the grid, even the pundits gave short odds on
 
