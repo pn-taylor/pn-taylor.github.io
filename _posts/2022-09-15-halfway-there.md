@@ -1,0 +1,11 @@
+---
+category: General
+featured_image: '/images/tarmac.JPG'
+title: Halfway There
+tags: fitness, life
+---
+It's been a while since I've actually rode my bike consistantly for any period of time. I used to ride fairly regularly and occasionally added in a long ride here and there. Once upon I team I rode from Sydney to Canberra, over two days, for a charity. That entailled 182km on day one and another 100km+ ride the next. It wasn't too bad, split up into 60km or thereabouts segments it was an interesting way to see the towns and roads that skirt the Rememberance Highway. However, life, idleness and a general lack of enthusiasm saw me ride less and less. A few mis-steps, consisting of failed day rides like Fitz's Challenge here in Canberra reduced that enthusiasm, or what was left of it, even further.
+
+However, the last year has been an interesting one, and mostly not for the right reasons. My daughter's best friend was diagnosed with leukemia last November and, along with her mum, have been living in Sydney since then in a Ronald McDonald House. There's been plenty of ups and downs and whilst things have been mostly positive there are moments that seem sad and never ending. My wife, who's best friend is her mum, has also been going up, one day, ever week pretty much since then too with a few gaps here and there, mostly when we were on holiday in WA. One thing I gathered through catchups and talks about what's going on is just how much the Starlight Children's Foundation has helped during the darkest of times.
+
+They have people, called captains, who go around wards in hospitals being all silly and are purely there to make the kids smile and bring a little bright spot back into their day. I got the feeling they appeared just when things can seem at the worst and just seem to be full of awesome people. As such, when I saw a Facebook ad of all things, that Starlight's annual Tour de Kids was happening in September, I knew I could join as a way of doing my part to help the cause. So, since the start of this month, I've been riding to work and finding time here and there to add more kilometers to the bank. We're halfway through and I'm just over halfway there distance wise and not too far off my fundraising goal of A$1,000. If you could, and would like to, you can [donate here](https://tourdekids.org.au/peter-taylor).
