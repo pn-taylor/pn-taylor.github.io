@@ -3,6 +3,7 @@ category: General
 featured_image: '/images/tarmac.JPG'
 title: Halfway There
 tags: fitness, life
+excerpt: It's been a while since I've actually rode my bike consistantly for any period of time. I used to ride fairly regularly and occasionally added in a long ride here and there. Once upon I team I rode from Sydney to Canberra, over two days, for a charity. That entailled 182km on day one and another 100km+ ride the next. It wasn't too bad, split up into 60km or thereabouts segments it was an interesting way to see the towns and roads that skirt the Rememberance Highway. However, life, idleness and a general lack of enthusiasm saw me ride less and less. A few mis-steps, consisting of failed day rides like Fitz's Challenge here in Canberra reduced that enthusiasm, or what was left of it, even further.
 ---
 It's been a while since I've actually rode my bike consistantly for any period of time. I used to ride fairly regularly and occasionally added in a long ride here and there. Once upon I team I rode from Sydney to Canberra, over two days, for a charity. That entailled 182km on day one and another 100km+ ride the next. It wasn't too bad, split up into 60km or thereabouts segments it was an interesting way to see the towns and roads that skirt the Rememberance Highway. However, life, idleness and a general lack of enthusiasm saw me ride less and less. A few mis-steps, consisting of failed day rides like Fitz's Challenge here in Canberra reduced that enthusiasm, or what was left of it, even further.
 
