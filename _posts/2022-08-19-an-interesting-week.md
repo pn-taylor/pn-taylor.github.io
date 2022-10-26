@@ -1,6 +1,7 @@
 ---
 category: General
 featured_image: '/images/karijini.jpg'
+title: An Interesting Week
 ---
 Well, the headline pretty much sums things up rather neatly but it was interesting in a good way. From getting this blog up and running, somewhat properly on GitHub via the use of Jekyll, to crossing off a few projects both at work and at home. There's something rather rewarding about crossing tasks off, even if they're relatively minor ones. I'm also, slowly, getting the hang of how all of this comes together and recently figured out how to add images to the left menu.
 
