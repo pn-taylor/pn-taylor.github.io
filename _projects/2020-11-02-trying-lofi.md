@@ -8,11 +8,11 @@ Here's to building my first project page for something that, in all likelihood, 
 
 Last year for my birthday I bought myself an [MPK Mini MK3](https://www.akaipro.com/mpk-mini-mk3) midi keyboard. I'd been mulling over what to do as a hobby outside of gaming to unwind with and occupy the mind. Some would say I should probably have picked something that didn't involve a computer screen but hey-ho. I've had it over a year now and I've barely used it mostly, I think, because I'm just not sure how to start. As such, its sat, on my desk shelves, occasionally brought out when I wanted to just mess around but with no focus.
 
-## So Why LoFi?
+### So Why LoFi?
 
 I discovered LoFi as a genre thanks, mostly, to ads I was seeing everywhere about music to listen to when studying that featured lots of music from the label [Chilled Cow](https://www.youtube.com/channel/UCM-4FLc3wlRHaoWseua1v3A). I really liked listening to it, often when writing game reviews and felt it was something I could try my hand at. That's not to say there's anything easy about it but a lot of tracks tend to be short loops and it was somewhere to start
 
-## Something - Nov 2022
+### Something - Nov 2022
 
 {% include embed-audio.html src="/uploads/first_lofi.wav" %}
 
