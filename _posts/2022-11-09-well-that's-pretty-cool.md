@@ -41,4 +41,4 @@ Assuming you want to upgrade them all (and that's kind of the point) you'll want
 winget upgrade --all
 ```
 
-Then all that happens is that it goes off, downloads the applications newest version and installs it. You'll get a fair few windows pop-up from each applications installation software and it's worth making sure any apps identified as needing an update are closed first but, once the process has finished, you're done and all your apps are up-to-date and all you needed to do was enter two commands; neat huh! (Thanks to @marcustechnology on TikTok)
+Then all that happens is that it goes off, downloads the applications newest version and installs it. You'll get a fair few windows pop-up from each applications installation software and it's worth making sure any apps identified as needing an update are closed first but, once the process has finished, you're done and all your apps are up-to-date and all you needed to do was enter two commands; neat huh! (Thanks to [@marcustechnology](https://www.tiktok.com/@marcustechnology) on TikTok)
