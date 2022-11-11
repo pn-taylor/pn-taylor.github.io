@@ -28,6 +28,7 @@ contact_settings:
 
 social_settings:
   facebook_url: ''
+  mastodon_url: 'https://aus.social/@pntaylor'
   twitter_url: 'https://www.twitter.com/pntaylor'
   instagram_url: ''
   snapchat_url: ''
@@ -53,7 +54,6 @@ social_settings:
   spotify_url: ''
   bandcamp_url: ''
   linkedin_url: 'https://www.linkedin.com/in/pntaylor/'
-  mastodon_url: 'https://aus.social/@pntaylor'
 
 color_settings:
   background_color: '#ffffff'
