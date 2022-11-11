@@ -53,6 +53,7 @@ social_settings:
   spotify_url: ''
   bandcamp_url: ''
   linkedin_url: 'https://www.linkedin.com/in/pntaylor/'
+  mastodon_url: 'https://aus.social/@pntaylor'
 
 color_settings:
   background_color: '#ffffff'
