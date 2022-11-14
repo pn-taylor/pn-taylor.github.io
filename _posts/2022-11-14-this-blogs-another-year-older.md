@@ -1,7 +1,7 @@
 ---
 category: General
 featured_image: '/images/rainbow.JPG'
-title: Well That's Pretty Cool
+title: This Blog's Another Year Older
 tags: blog, birthday, weekend, life
 excerpt: Whilst this particular iteration of my blog is a mere six months old, I've had one, of some description for, heck, fifteen years at least. That being said, it's not been a hotbed of activity in that time, particularly the last ten years that I've been in Australia which is odd. You'd think moving to the other side of the world would provide no end of content. Different style of life, things that take getting used to and hot takes on local politics from the point of view of a relative newcomer. However, as it was, I barely posted. I think that was mostly down to worrying that people would find it offensive(?) maybe. I dunno, but I didn't want to put anything up that might be mis-read.
 ---
@@ -13,3 +13,5 @@ So, will that change now that I've been here a decade? Maybe, I don't know. I'll
 This past weekend was nice though, mostly because it was capped off by [England beating Pakistan](https://www.bbc.com/sport/cricket/63613694) in the final of the T20 World cup here in Australia. It was an entertaining final with both teams in with a shout right up until the very end. It very much turned on the injury to Shaheen who injured himself taking a catch. The fact he couldn't bowl at the end likely made things easier for England but who's to say? Either way, it was fun to watch and enjoyable and not just because England won. I geninuely enjoy any final so long as it's not a one-sided hiding.
 
 The week ahead holds a dance concert for the girls which in turn involves tech rehersals and long hours for them on the weekend. It'll be stressful, I'm sure, but this isn't our first show; I'm pretty sure it's my eldests' third one now. I probably should know for sure but the COVID years makes things a touch fuzzy. They'll enjoy it, doubly so when they get to watch the DVD later on at home. That's usually a few weeks later but it gives them something to look forward to and I'm sure they'll have a friend or two over to watch it though not at the same time, that'd be manic!
+
+*Edit I noticed after I uploaded I hadn't changed the title in the Front Matter (lazy me!)
