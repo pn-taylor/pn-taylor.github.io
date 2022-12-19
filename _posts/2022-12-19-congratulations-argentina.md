@@ -1,7 +1,7 @@
 ---
 category: Sport
 featured_image: '/images/messi.jpg'
-title: World Cup Thoughts
+title: Congratulations Argentina
 tags: sport, football, Argentina, France, World Cup, Qatar
 excerpt: For some obscure reason I thought the World Cup final was this coming Wednesday, it wasn't, it was last night. Even if I'd realised the correct day I still wouldn't have tuned in and not in some sort of pseudo-protest, I just want to sleep. Still, it was good to see Argentina and by extension Messi, seal the win. I've been an admirer of Messi and how he's played football for many years and to see him finally succeed on the World's biggest stage feels fitting, especially as it's his last. You could say it was destined to happen that finally, after so many attempts, the only accolade eluding him would finally be his.
 ---
