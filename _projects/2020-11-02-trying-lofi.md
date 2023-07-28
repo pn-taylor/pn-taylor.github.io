@@ -10,7 +10,7 @@ Last year for my birthday I bought myself an [MPK Mini MK3](https://www.akaipro.
 
 ### So Why LoFi?
 
-I discovered LoFi as a genre thanks, mostly, to ads I was seeing everywhere about music to listen to when studying that featured lots of music from the label [Chilled Cow](https://www.youtube.com/channel/UCM-4FLc3wlRHaoWseua1v3A). I really liked listening to it, often when writing game reviews and felt it was something I could try my hand at. That's not to say there's anything easy about it but a lot of tracks tend to be short loops and it was somewhere to start
+I discovered LoFi as a genre thanks, mostly, to ads I was seeing everywhere about music to listen to when studying that featured lots of music from the label [Lowfi Girl](https://www.youtube.com/@LofiGirl). I really liked listening to it, often when writing game reviews and felt it was something I could try my hand at. That's not to say there's anything easy about it but a lot of tracks tend to be short loops and it was somewhere to start
 
 ### Something - Nov 2022
 
