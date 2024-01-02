@@ -1,6 +1,6 @@
 ---
 category: General
-featured_image: 'canberra_night.jpg'
+featured_image: '/images/canberra_night.jpg'
 title: End of Another Year
 tags: life, 2023
 excerpt: I haven't written here as much as I thought I would this year. Mostly I just kind of forgot and also reminded myself that this is really here for when I want to write something rather than feeling obligated to. Still, I thought I'd have written a bit more but there you go, maybe 2024 will yield more inspiration. This year has been something else, especially the last few months. Lots of things going on, and lots of introspection. Where all that will go next year remains to be seen, I have certain hopes but ultimately some of that is beyond my control and one things I have been really focussing on is concentrating on what I can control, which is myself and how I respond.
