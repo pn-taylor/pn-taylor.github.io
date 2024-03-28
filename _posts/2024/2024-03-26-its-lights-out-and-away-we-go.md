@@ -1,6 +1,6 @@
 ---
 category: General
-featured_image: '/images/melbourne-f1_2024/PXL_20240324_032139460.MP-min'
+featured_image: '/images/melbourne-f1_2024/PXL_20240322_013837027.MP-min.jpg'
 title: It's Lights Out And Away We Go!
 tags: life, general, sport, motorsport, 2024
 excerpt: It's been quite some time since I'd been to a Formula 1 Grand Prix. The last one was in 2005 though it was rather swanking in that it was at Monaco. However, the ticket I had was for general admission and was a lovely present from Cat. She couldn't come with me so I took my good friend Kieran instead and had a great time on race day watching Kimi Räikkönen emerge victorious driving for McLaren. From what I remember it was an entertaining race, well, as far as races at Monaco go, and I really enjoyed the atmosphere that even us plebs up in the cheap seats (so cheap we were standing) felt a part of it.
@@ -46,7 +46,7 @@ I've been to Melbourne a few times though this was the first I really got out an
 The next day I got up, headed to the circuit, walked that twice or thereabouts and then met up with a friend that evening for dinner and a stroll. We even made it to [Fortress Melbourne](https://www.fortress.games/) to try my hand a competition they were running over the grand prix weekend. After walking back to my hotel I noticed that I'd walked forty-thousand steps or just a shade over thirty kilometers that day! The other days were far less active but still exceeding ten-thousand steps per day. All told it looks like I walked around ninty-thousand steps over the four days I was there. That wasn't planned by any stretch so I'm proud of myself to be able and willing to just get up and go and keep walking to and from the circuit. That said, the sardine can like trams and busses probably helped my decision to walk :joy:
 
 <div class="gallery" data-columns="1">
- <img src="/images/melbourne-f1_2024/PXL_20240324_040915545-min.jpgg" alt="Max Verstappen left something behind">
+ <img src="/images/melbourne-f1_2024/PXL_20240324_040915545-min.jpg" alt="Max Verstappen left something behind">
  <img src="/images/melbourne-f1_2024/PXL_20240324_042106033-min.jpg" alt="Lando Norris">
  <img src="/images/melbourne-f1_2024/PXL_20240324_042115434-min.jpg" alt="Fernando Alonso">
  <img src="/images/melbourne-f1_2024/PXL_20240324_042126038-min.jpg" alt="Oscar Piastri">
