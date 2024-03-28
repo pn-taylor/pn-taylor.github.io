@@ -53,6 +53,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-tagging-related_posts
   - jekyll-feed
+  - jemoji
 paginate: 6
 paginate_path: "/blog/page:num/"
   
