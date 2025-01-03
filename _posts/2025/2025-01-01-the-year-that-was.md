@@ -1,5 +1,6 @@
 ---
 category: General
+post_to_mastodon: true
 featured_image: '/images/blog_images/lake_view.jpg'
 title: The Year That Was...
 tags: life, 2025

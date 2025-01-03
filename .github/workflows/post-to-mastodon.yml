@@ -1,0 +1,38 @@
+name: Post to Mastodon
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  post_to_mastodon:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Extract latest blog post
+      id: get_latest_post
+      run: |
+        # Find the latest post
+        LATEST_POST=$(ls -t _posts | head -n 1)
+        
+        # Check if the post has the 'post_to_mastodon' flag set to true
+        POST_FLAG=$(grep -m 1 '^post_to_mastodon: true' "_posts/$LATEST_POST" || echo "false")
+        
+        if [ "$POST_FLAG" != "true" ]; then
+          echo "No post flagged for Mastodon. Exiting."
+          exit 0
+        fi
+        
+        # Extract the URL of the latest post
+        BLOG_URL="https://your-jekyll-site.com/$(basename $LATEST_POST .md).html"
+        echo "BLOG_URL=$BLOG_URL" >> $GITHUB_ENV
+
+    - name: Post to Mastodon
+      run: |
+        curl -X POST -H "Authorization: Bearer ${{ secrets.MASTODON_ACCESS_TOKEN }}" \
+             -F "status=Check out my latest blog post: $BLOG_URL" \
+             https://mastodon.social/api/v1/statuses
