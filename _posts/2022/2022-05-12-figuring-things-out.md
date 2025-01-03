@@ -1,6 +1,6 @@
 ---
 category: General
-title: Trying Something New
+title: Figuring Things Out
 ---
 ## Starting Off
 
