@@ -1,6 +1,6 @@
 ---
 category: General
-featured_image: '/images/sunflower_bees.jpg'
+featured_image: '/images/blog_images/sunflower_bees.jpg'
 title: Life Moves Pretty Fast
 tags: life, musings, 2023, general
 excerpt: It's been quite a while since I last posted anything here which is pretty typical and I'm fairly sure on the old WordPress blog there was at least two or three posts that started out with a similar exclamation. In any event, I've not posted anything since February and every time I looked at my site I kept on telling myself that I should write something soon, what about, I wasn't sure but it's not like nothing's been happening. There's been a few small trips, football season here in the ACT has started alongside school for the kids and the resumption of extracurricular activities; including some new ones.

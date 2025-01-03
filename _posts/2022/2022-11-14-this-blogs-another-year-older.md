@@ -1,6 +1,6 @@
 ---
 category: General
-featured_image: '/images/rainbow.JPG'
+featured_image: '/images/blog_images/rainbow.JPG'
 title: This Blog's Another Year Older
 tags: blog, birthday, weekend, life
 excerpt: Whilst this particular iteration of my blog is a mere six months old, I've had one, of some description for, heck, fifteen years at least. That being said, it's not been a hotbed of activity in that time, particularly the last ten years that I've been in Australia which is odd. You'd think moving to the other side of the world would provide no end of content. Different style of life, things that take getting used to and hot takes on local politics from the point of view of a relative newcomer. However, as it was, I barely posted. I think that was mostly down to worrying that people would find it offensive(?) maybe. I dunno, but I didn't want to put anything up that might be mis-read.

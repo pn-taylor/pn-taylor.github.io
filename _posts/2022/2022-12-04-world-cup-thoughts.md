@@ -1,6 +1,6 @@
 ---
 category: Sport
-featured_image: '/images/seattle-sounders.JPG'
+featured_image: '/images/blog_images/seattle-sounders.JPG'
 title: World Cup Thoughts
 tags: sport, football, England, World Cup, Qatar
 excerpt: I was very unsure about this years' World Cup, mostly for its hosted location, Qatar, and the very known issues it has with human rights, gay rights and, well, just rights in general. I appreciate the need to respect other countries culture and way of life and I believe that, to a great or lesser extent, Western nations have meddled too much in the affairs of other countries. That being said, that doesn't mean a competition such as the World Cup which, in my opinion, is meant to be one meant to unite all nations and all walks of life, should be in a country that it, itself, does not abide by. This also throws a unique curveball with the USA among the joint hosts for the next one and their record isn't exactly squeaky clean either.

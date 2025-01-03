@@ -1,6 +1,6 @@
 ---
 category: Reviews
-featured_image: '/images/alien-romulus-logo.png'
+featured_image: '/images/blog_images/alien-romulus-logo.png'
 title: 'Alien: Romulus - Review'
 tags: reviews, movies, 'Alien franchise','Alien Romulus', thoughts
 excerpt: "I'm a big fan of the Alien franchise, with my absolute favourite being Aliens, so much so I backed the excellent documentary, Aliens: Expanded. It's a four-hour long documentary filled with some really interesting stories, anecdotes and it was a fascinating watch. If you're a fan, it's worth the purchase. Anyway, when I heard that a new Alien movie was on the way I was both happy and apprehensive. Much like the Predator franchise, recent installments had been lacklustre, however, the existance of Prey filled me with a little bit of hope that, in the right hands, we might get a decent movie. So knowing that director Fede Álvarez's history being in horror movies, those feelings of hope increase and, after watching the movie this past week, I'm glad to report that we finally have a movie that adds to the franchise rather than detracts."

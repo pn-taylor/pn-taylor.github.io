@@ -1,5 +1,6 @@
 ---
 category: General
+title: Sound of Silence
 ---
 Been a hot second since I last posted and to be honest, not a lot has changed here. I did, however, manage to get CV and About page to appear in the left-hand menu. Turns out I needed to a title in the pre-load stuff that you put in this files (there's a proper name for them but I forget what it is). Outside of blog life my PC had to get a bit of an update due to a bearing failure on my graphics card's fan. I could've possibly survived with just a noisy-ass fan but decided that it was better to be safe than sorry.
 

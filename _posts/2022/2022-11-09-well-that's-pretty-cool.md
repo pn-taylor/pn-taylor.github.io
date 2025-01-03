@@ -1,6 +1,6 @@
 ---
 category: Tech
-featured_image: '/images/cmd.png'
+featured_image: '/images/blog_images/cmd.png'
 title: Well That's Pretty Cool
 tags: tech, windows, windows 11, windows 10, cmd, admin
 excerpt: I've been working in IT for just over fifteen years now. One thing you understand, though, is that you forget more than you learn and that there's always something out there that you never knew about but, once you discover it, you're amazed you didn't know about it before. This happened to me today whilst flicking through TikTok. A lot of the TechToks, as I like to think they're called, are things I've come across before or just seem a touch sketchy. However, despite some initial reservations I'm glad I gave this one a go as it's potentially quite revolutionary for me.

@@ -1,6 +1,6 @@
 ---
 category: Sport
-featured_image: '/images/2015_ashes.JPG'
+featured_image: '/images/blog_images/2015_ashes.JPG'
 title: Line & Length
 tags: life, sport, 2023, cricket, england, australia
 excerpt: With the watery end to the fourth Ashes test match, I feel ever so slightly sad that its outcome makes the fifth test slightly less compelling. Sure, with a win (or draw), Australia can secure an outright Ashes series win in England for the first time since 2001. With this hanging over the match, England still need to win to avoid a series defeat, something I'm sure they'll be keen to avoid. However, had we seen a result in Manchester, the fifth test at the Oval could have been for all the marbles.

@@ -1,6 +1,6 @@
 ---
 category: General
-featured_image: '/images/bathurst_2022.jpg'
+featured_image: '/images/blog_images/bathurst_2022.jpg'
 title: Another Solar Orbit
 tags: life, sport, birthdays
 excerpt: It was my birthday last week, the last one of my thirties. I'll need to set a reminder that I'll need to change all my social bios next year to 'forty-something.' Turning thirty seems far longer ago than just ten years. It was a fun birthday though. It had an epic cake, my mum and brother were visiting from the UK and I was probably the fittest I've ever been (or likely to be if I'm honest). Will my fortieth be the same? I'm not sure. As far as I know, no family will be visiting but I'm sure my wife and kids will make it pretty epic and we get a test run this year anyway as my wife turns forty herself this December.

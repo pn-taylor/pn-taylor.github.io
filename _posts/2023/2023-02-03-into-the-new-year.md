@@ -1,6 +1,6 @@
 ---
 category: General
-featured_image: '/images/new_car.jpg'
+featured_image: '/images/blog_images/new_car.jpg'
 title: Into The New Year
 tags: life, musings, 2023, general
 excerpt: So 2022 ended just over a month ago. I've been a little tardy in writing anything but to be honest, I didn't particularly want to go over the vagaries of the last year. That's not to say nothing interesting happened just that I couldn't motivate myself to write anything about it. Realistically, life is moving ever onwards without much change but I did pickup a new car last month after our X-Trail got to the point where it was just not worth the money fixing the things that were wrong.

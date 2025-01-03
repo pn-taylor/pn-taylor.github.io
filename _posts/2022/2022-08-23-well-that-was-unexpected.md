@@ -2,7 +2,7 @@
 category: Sport
 title: Well That Was Unexpected
 tag: Man Utd
-featured_image: '/images/j_sancho.jpg'
+featured_image: '/images/blog_images/j_sancho.jpg'
 excerpt: To say I expected Liverpool to run out winners against Man Utd on the weekend is a bit of an understatement. Given the abject apathy our first two games entailed I was expecting another hiding to be honest and whilst Liverpool themselves had injury worries and suspension of their new striker, I genuinely didn't think United would muster much against them. Mostly because, it seemed, the players weren't taking to Ten Hag's system or, as they've seemingly done in the past, just decided they didn't give enough of a shit. However, it's games like this, with rivalries on the line, that can somehow inject life and passion where previously there had been none.
 ---
 To say I expected Liverpool to run out winners against Man Utd on the weekend is a bit of an understatement. Given the abject apathy our first two games entailed I was expecting another hiding to be honest and whilst Liverpool themselves had injury worries and suspension of their new striker, I genuinely didn't think United would muster much against them. Mostly because, it seemed, the players weren't taking to Ten Hag's system or, as they've seemingly done in the past, just decided they didn't give enough of a shit. However, it's games like this, with rivalries on the line, that can somehow inject life and passion where previously there had been none.

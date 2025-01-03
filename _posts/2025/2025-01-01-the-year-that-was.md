@@ -1,6 +1,6 @@
 ---
 category: General
-featured_image: '/images/lake_view.jpg'
+featured_image: '/images/blog_images/lake_view.jpg'
 title: The Year That Was...
 tags: life, 2025
 excerpt: I find it interesting that, in life, we put a lot of weight on the future being better. Tomorrow will be better, there's always next week, or, as I thought, next year will be my year. This is a somewhat pessimistic view and, if I'm honest, I think looking at life that way is a good way to view life, but after a few tricky years I genuinely was looking forward to closing out 2023 and kicking off 2024 with a fresh outlook. As it turned out, 2023 ended very differently than I thought and 2024 became a very different year. There's been positives from it, for sure, and I look ahead to 2025 with the same "this will be my year feeling" and I guess, at least, this time, it's far more within my control.
