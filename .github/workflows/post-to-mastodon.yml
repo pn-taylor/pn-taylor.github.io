@@ -16,11 +16,11 @@ jobs:
     - name: Extract latest blog post
       id: get_latest_post
       run: |
-        # Find the latest post
-        LATEST_POST=$(ls -t _posts | head -n 1)
+        # Find the most recent post file recursively in _posts
+        LATEST_POST=$(find _posts -type f -name "*.md" | xargs ls -t | head -n 1)
         
         # Check if the post has the 'post_to_mastodon' flag set to true
-        POST_FLAG=$(grep -m 1 '^post_to_mastodon: true' "_posts/$LATEST_POST" || echo "false")
+        POST_FLAG=$(grep -m 1 '^post_to_mastodon: true' "$LATEST_POST" || echo "false")
         
         if [ "$POST_FLAG" != "true" ]; then
           echo "No post flagged for Mastodon. Exiting."
@@ -28,7 +28,7 @@ jobs:
         fi
         
         # Extract the URL of the latest post
-        BLOG_URL="https://your-jekyll-site.com/$(basename $LATEST_POST .md).html"
+        BLOG_URL="https://your-jekyll-site.com/$(basename ${LATEST_POST%.*}).html"
         echo "BLOG_URL=$BLOG_URL" >> $GITHUB_ENV
 
     - name: Post to Mastodon
