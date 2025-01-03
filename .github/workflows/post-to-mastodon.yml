@@ -13,26 +13,49 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Extract latest blog post
-      id: get_latest_post
+    - name: Get latest commit time
+      id: get_commit_time
       run: |
-        # Find the most recent post file recursively in _posts, handling special characters
-        LATEST_POST=$(find _posts -type f -name "*.md" -print0 | xargs -0 ls -t | head -n 1)
+        # Get the timestamp of the latest commit
+        COMMIT_TIME=$(git log -1 --format=%ct)
+        echo "COMMIT_TIME=$COMMIT_TIME" >> $GITHUB_ENV
+
+    - name: Find posts with Mastodon flag and valid date
+      id: find_flagged_posts
+      run: |
+        # Find all posts with 'post_to_mastodon: true' recursively
+        FLAGGED_POSTS=$(grep -rl '^post_to_mastodon: true' _posts)
         
-        # Check if the post has the 'post_to_mastodon' flag set to true
-        POST_FLAG=$(grep -m 1 '^post_to_mastodon: true' "$LATEST_POST" || echo "false")
-        
-        if [ "$POST_FLAG" != "true" ]; then
-          echo "No post flagged for Mastodon. Exiting."
+        if [ -z "$FLAGGED_POSTS" ]; then
+          echo "No posts flagged for Mastodon. Exiting."
           exit 0
         fi
-        
-        # Extract the URL of the latest post
-        BLOG_URL="https://your-jekyll-site.com/$(basename ${LATEST_POST%.*}).html"
-        echo "BLOG_URL=$BLOG_URL" >> $GITHUB_ENV
+
+        # Filter posts based on the date and commit time
+        POST_URLS=""
+        for POST in $FLAGGED_POSTS; do
+          # Extract the post date (assumes YYYY-MM-DD in filename)
+          POST_DATE=$(basename "$POST" | cut -d'-' -f1-3)
+          POST_TIMESTAMP=$(date -d "$POST_DATE" +%s)
+
+          if [ "$POST_TIMESTAMP" -ge "$COMMIT_TIME" ]; then
+            URL="https://your-jekyll-site.com/$(basename ${POST%.*}).html"
+            POST_URLS+="$URL"$'\n'
+          fi
+        done
+
+        if [ -z "$POST_URLS" ]; then
+          echo "No posts with valid dates found. Exiting."
+          exit 0
+        fi
+
+        echo "POST_URLS=$POST_URLS" >> $GITHUB_ENV
 
     - name: Post to Mastodon
+      if: env.POST_URLS != ''
       run: |
-        curl -X POST -H "Authorization: Bearer ${{ secrets.MASTODON_ACCESS_TOKEN }}" \
-             -F "status=Check out my latest blog post: $BLOG_URL" \
-             https://mastodon.social/api/v1/statuses
+        for URL in $(echo $POST_URLS); do
+          curl -X POST -H "Authorization: Bearer ${{ secrets.MASTODON_ACCESS_TOKEN }}" \
+               -F "status=Check out my latest blog post: $URL" \
+               https://mastodon.social/api/v1/statuses
+        done
