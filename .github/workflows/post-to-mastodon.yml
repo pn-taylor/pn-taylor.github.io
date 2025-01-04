@@ -46,7 +46,7 @@ jobs:
 
             # Compare post date to commit date
             if [ "$POST_DATE" == "$COMMIT_DATE" ]; then
-              URL="https://www.pntaylor.net/blog/$(basename ${POST%.*} | sed 's/\(.*\)\.md/\1/')"
+              URL="https://www.pntaylor.net/blog/$(basename ${POST%.*} | sed 's/^[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}-//')"
               POST_URLS+="$URL"$'\n'
               echo "Post $POST is eligible for posting (same day)."
             else
