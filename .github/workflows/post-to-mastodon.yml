@@ -30,22 +30,25 @@ jobs:
           POST_URLS=""
           for POST in $FLAGGED_POSTS; do
             # Attempt to get date from front matter
-            POST_TIMESTAMP=$(grep '^date:' "$POST" | head -n 1 | sed 's/date: //' | xargs -I{} date -d "{}" +%s || true)
+            POST_DATE=$(grep '^date:' "$POST" | head -n 1 | sed 's/date: //' | cut -d' ' -f1 || true)
 
             # Fallback to file name if no date field is found
-            if [ -z "$POST_TIMESTAMP" ]; then
+            if [ -z "$POST_DATE" ]; then
               POST_DATE=$(basename "$POST" | cut -d'-' -f1-3)
-              POST_TIMESTAMP=$(date -d "$POST_DATE" +%s)
             fi
 
-            echo "Checking post: $POST"
-            echo "Post timestamp (Unix): $POST_TIMESTAMP"
+            # Get commit date (only the date portion, no time)
+            COMMIT_DATE=$(date -d "@$COMMIT_TIME" +"%Y-%m-%d")
 
-            # Compare post timestamp to the latest commit time
-            if [ "$POST_TIMESTAMP" -ge "$COMMIT_TIME" ]; then
+            echo "Checking post: $POST"
+            echo "Post date: $POST_DATE"
+            echo "Commit date: $COMMIT_DATE"
+
+            # Compare post date to commit date
+            if [ "$POST_DATE" == "$COMMIT_DATE" ]; then
               URL="https://www.pntaylor.net/$(basename ${POST%.*}).html"
               POST_URLS+="$URL"$'\n'
-              echo "Post $POST is eligible for posting."
+              echo "Post $POST is eligible for posting (same day)."
             else
               echo "Post $POST is too old."
             fi
