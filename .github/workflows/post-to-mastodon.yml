@@ -10,57 +10,57 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Get latest commit time
-      id: get_commit_time
-      run: |
-        # Get the timestamp of the latest commit
-        COMMIT_TIME=$(git log -1 --format=%ct)
-        echo "COMMIT_TIME=$COMMIT_TIME" >> $GITHUB_ENV
+      - name: Get the latest commit timestamp
+        id: get_commit_time
+        run: echo "COMMIT_TIME=$(git log -1 --pretty=%ct)" >> $GITHUB_ENV
 
-    - name: Find posts with Mastodon flag and valid date
-      id: find_flagged_posts
-      run: |
-        # Find all posts with 'post_to_mastodon: true' recursively
-        FLAGGED_POSTS=$(grep -rl '^post_to_mastodon: true' _posts)
-        
-        if [ -z "$FLAGGED_POSTS" ]; then
-          echo "No posts flagged for Mastodon. Exiting."
-          exit 0
-        fi
+      - name: Find posts with Mastodon flag and valid timestamp
+        id: find_flagged_posts
+        run: |
+          FLAGGED_POSTS=$(grep -rl '^post_to_mastodon: true' _posts)
 
-        # Debug file and commit timestamps
-        echo "Latest commit time: $COMMIT_TIME"
-        FLAGGED_POSTS=$(grep -rl '^post_to_mastodon: true' _posts)
-        echo "Flagged posts: $FLAGGED_POSTS"
-
-        # Filter posts based on the date and commit time
-        POST_URLS=""
-        for POST in $FLAGGED_POSTS; do
-          # Extract the post date (assumes YYYY-MM-DD in filename)
-          POST_DATE=$(basename "$POST" | cut -d'-' -f1-3)
-          POST_TIMESTAMP=$(date -d "$POST_DATE" +%s)
-
-          if [ "$POST_TIMESTAMP" -ge "$COMMIT_TIME" ]; then
-            URL="https://your-jekyll-site.com/$(basename ${POST%.*}).html"
-            POST_URLS+="$URL"$'\n'
+          if [ -z "$FLAGGED_POSTS" ]; then
+            echo "No posts flagged for Mastodon. Exiting."
+            exit 0
           fi
-        done
 
-        if [ -z "$POST_URLS" ]; then
-          echo "No posts with valid dates found. Exiting."
-          exit 0
-        fi
+          POST_URLS=""
+          for POST in $FLAGGED_POSTS; do
+            # Attempt to get date from front matter
+            POST_TIMESTAMP=$(grep '^date:' "$POST" | head -n 1 | sed 's/date: //' | xargs -I{} date -d "{}" +%s || true)
 
-        echo "POST_URLS=$POST_URLS" >> $GITHUB_ENV
+            # Fallback to file name if no date field is found
+            if [ -z "$POST_TIMESTAMP" ]; then
+              POST_DATE=$(basename "$POST" | cut -d'-' -f1-3)
+              POST_TIMESTAMP=$(date -d "$POST_DATE" +%s)
+            fi
 
-    - name: Post to Mastodon
-      if: env.POST_URLS != ''
-      run: |
-        for URL in $(echo $POST_URLS); do
-          curl -X POST -H "Authorization: Bearer ${{ secrets.MASTODON_ACCESS_TOKEN }}" \
-               -F "status=Check out my latest blog post: $URL" \
-               https://mastodon.social/api/v1/statuses
-        done
+            echo "Checking post: $POST"
+            echo "Post timestamp (Unix): $POST_TIMESTAMP"
+
+            # Compare post timestamp to the latest commit time
+            if [ "$POST_TIMESTAMP" -ge "$COMMIT_TIME" ]; then
+              URL="https://www.pntaylor.net/$(basename ${POST%.*}).html"
+              POST_URLS+="$URL"$'\n'
+              echo "Post $POST is eligible for posting."
+            else
+              echo "Post $POST is too old."
+            fi
+          done
+
+          if [ -z "$POST_URLS" ]; then
+            echo "No posts with valid timestamps found. Exiting."
+            exit 0
+          fi
+
+          echo "POST_URLS=$POST_URLS" >> $GITHUB_ENV
+
+      - name: Post to Mastodon
+        if: env.POST_URLS != ''
+        run: |
+          for URL in $(echo "$POST_URLS"); do
+            toot post "New blog post: $URL"
+          done
