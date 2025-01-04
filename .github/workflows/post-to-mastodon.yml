@@ -72,7 +72,8 @@ jobs:
           TOOT_CONFIG: ${{ secrets.MASTODON_CONFIG }}
         run: |
           mkdir -p ~/.config/toot
-          echo "$TOOT_CONFIG" > ~/.config/toot/config.yaml
+          echo "$TOOT_CONFIG" > ~/.config/toot/config.json
+          chmod 600 ~/.config/toot/config.json
 
       - name: Post to Mastodon
         if: env.POST_URLS != ''
