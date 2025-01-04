@@ -1,0 +1,16 @@
+---
+category: General
+post_to_mastodon: true
+featured_image: '/images/blog_images/StarsThunder-2024.jpg'
+title: A Slow Start
+tags: life, family, friends, sport
+excerpt: So the new year has gotten of to a typically slow start. We've mostly just hung out, played Minecraft and enjoyed each other's company. We did spend a lovely evening with friends yesterday though it was curtailed somewhat by a brief storm and rain. Nine spent a good chunk of time splashing around in the lake though, for safety, I made sure a shower was had when we got home as you just never know with public lakes. Ten joined in for a bit but then came back to where we were hanging out and chatted which was lovely.
+---
+
+So the new year has gotten of to a typically slow start. We've mostly just hung out, played Minecraft and enjoyed each other's company. We did spend a lovely evening with friends yesterday though it was curtailed somewhat by a brief storm and rain. Nine spent a good chunk of time splashing around in the lake though, for safety, I made sure a shower was had when we got home as you just never know with public lakes. Ten joined in for a bit but then came back to where we were hanging out and chatted which was lovely. Hopefully we can do something similar again sometime soon, there's still a few weeks of their summer holidays left so plenty of time. That said, the last two weeks, for Nine at least, there's a lot of dancing with their intensives. Ten also has intensives but it's on the weekend which is a shame as it'll mean I won't see as much of her as normal, but them's the breaks and we'll make up for it another time.
+
+#### Looking Ahead
+
+There's planning to do, mind, with Ten's birthday coming up. She already knows what to do so now I just need to do a bit of research and come back with some options. I also want to see if I can sneak a day down the coast with them as well, though it'd have to be a day as overnight accomodation isn't cheap! I also have designs on doing a couple of excursions around Canberra as whilst hanging out is fun, it'd be more fun to go do something too. I'm thinking maybe the museum perhaps, they've an display on about Pompeii that I'd like to see and I think girls might find it interesting. I'm also looking at going to the Zoo and Aquarium too as it's been quite some time since we've been and I know there's been even more work done to make the areas for the animals larger and more interesting as well other improvements for visitors.
+
+Work also starts up again tomorrow. I've been working through the holidays as normal and I've one more job to do today before everyone rocks up in the office tomorrow. I'm hoping it won't take too long as I'd like to get back to watch the cricket which, I suspect, may conclude today going by the match so far and the state of the wicket. A draw is unlikely so either India will win and retain the trophy or Australia will do just enough to win it. It's been a fascinating series all told with the most recent test at the MCG on boxing day being the highlight match for me. The girls have a passing interest in the sport I watch and they ask questions which I appreciate. We went to a T20 just before New Year's at Manuka and it was great fun though I suspect the ability to have fairy floss late in to the evening may have had something to do with their enjoyment of it!
