@@ -69,7 +69,7 @@ jobs:
 
       - name: Configure Toot CLI
         env:
-          TOOT_CONFIG: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+          TOOT_CONFIG: ${{ secrets.MASTODON_CONFIG }}
         run: |
           mkdir -p ~/.config/toot
           echo "$TOOT_CONFIG" > ~/.config/toot/config.yaml
