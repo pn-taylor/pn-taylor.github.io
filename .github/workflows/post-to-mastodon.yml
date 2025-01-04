@@ -31,6 +31,11 @@ jobs:
           exit 0
         fi
 
+        # Debug file and commit timestamps
+        echo "Latest commit time: $COMMIT_TIME"
+        FLAGGED_POSTS=$(grep -rl '^post_to_mastodon: true' _posts)
+        echo "Flagged posts: $FLAGGED_POSTS"
+
         # Filter posts based on the date and commit time
         POST_URLS=""
         for POST in $FLAGGED_POSTS; do
