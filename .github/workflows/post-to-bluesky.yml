@@ -48,22 +48,32 @@ jobs:
 
           echo "POST_URLS=$POST_URLS" >> $GITHUB_ENV
 
-      - name: Install Bluesky CLI (bsky-cli)
+      - name: Install Python and Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y npm
-          npm install -g bsky-cli
+          sudo apt-get install -y python3 python3-pip
+          pip install atproto
 
-      - name: Log in to Bluesky CLI
+      - name: Post to Bluesky
+        if: env.POST_URLS != ''
         env:
           BLUESKY_USERNAME: ${{ secrets.BLUESKY_USERNAME }}
           BLUESKY_PASSWORD: ${{ secrets.BLUESKY_PASSWORD }}
         run: |
-          bsky login --username "$BLUESKY_USERNAME" --password "$BLUESKY_PASSWORD"
+          python3 - <<EOF
+          from atproto import Client
+          import os
 
-      - name: Post to Bluesky
-        if: env.POST_URLS != ''
-        run: |
-          for URL in $(echo "$POST_URLS"); do
-            bsky post "New blog post: $URL"
-          done
+          # Bluesky credentials
+          username = os.getenv("BLUESKY_USERNAME")
+          password = os.getenv("BLUESKY_PASSWORD")
+
+          # Login to Bluesky
+          client = Client()
+          client.login(username, password)
+
+          # Post each URL
+          post_urls = os.getenv("POST_URLS").splitlines()
+          for url in post_urls:
+              client.send_post(f"New blog post: {url}")
+          EOF
