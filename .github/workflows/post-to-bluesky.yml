@@ -1,4 +1,4 @@
-name: Post to Mastodon
+name: Post to Bluesky
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  post_to_mastodon:
+  post_to_bluesky:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,40 +17,27 @@ jobs:
         id: get_commit_time
         run: echo "COMMIT_TIME=$(git log -1 --pretty=%ct)" >> $GITHUB_ENV
 
-      - name: Find posts with Mastodon flag and valid timestamp
+      - name: Find posts with Bluesky flag and valid timestamp
         id: find_flagged_posts
         run: |
           FLAGGED_POSTS=$(grep -rl '^post_to_socials: true' _posts)
 
           if [ -z "$FLAGGED_POSTS" ]; then
-            echo "No posts flagged for Mastodon. Exiting."
+            echo "No posts flagged for Bluesky. Exiting."
             exit 0
           fi
 
           POST_URLS=""
           for POST in $FLAGGED_POSTS; do
-            # Attempt to get date from front matter
             POST_DATE=$(grep '^date:' "$POST" | head -n 1 | sed 's/date: //' | cut -d' ' -f1 || true)
-
-            # Fallback to file name if no date field is found
             if [ -z "$POST_DATE" ]; then
               POST_DATE=$(basename "$POST" | cut -d'-' -f1-3)
             fi
-
-            # Get commit date (only the date portion, no time)
             COMMIT_DATE=$(date -d "@$COMMIT_TIME" +"%Y-%m-%d")
 
-            echo "Checking post: $POST"
-            echo "Post date: $POST_DATE"
-            echo "Commit date: $COMMIT_DATE"
-
-            # Compare post date to commit date
             if [ "$POST_DATE" == "$COMMIT_DATE" ]; then
               URL="https://www.pntaylor.net/blog/$(basename ${POST%.*} | sed 's/^[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}-//')"
               POST_URLS+="$URL"$'\n'
-              echo "Post $POST is eligible for posting (same day)."
-            else
-              echo "Post $POST is too old."
             fi
           done
 
@@ -61,23 +48,22 @@ jobs:
 
           echo "POST_URLS=$POST_URLS" >> $GITHUB_ENV
 
-      - name: Install Toot CLI
+      - name: Install Bluesky CLI (bsky-cli)
         run: |
           sudo apt-get update
-          sudo apt-get install -y python3-pip
-          pip install toot
+          sudo apt-get install -y npm
+          npm install -g bsky
 
-      - name: Configure Toot CLI
+      - name: Log in to Bluesky CLI
         env:
-          TOOT_CONFIG: ${{ secrets.MASTODON_CONFIG }}
+          BLUESKY_USERNAME: ${{ secrets.BLUESKY_USERNAME }}
+          BLUESKY_PASSWORD: ${{ secrets.BLUESKY_PASSWORD }}
         run: |
-          mkdir -p ~/.config/toot
-          echo "$TOOT_CONFIG" > ~/.config/toot/config.json
-          chmod 600 ~/.config/toot/config.json
+          bsky login --username "$BLUESKY_USERNAME" --password "$BLUESKY_PASSWORD"
 
-      - name: Post to Mastodon
+      - name: Post to Bluesky
         if: env.POST_URLS != ''
         run: |
           for URL in $(echo "$POST_URLS"); do
-            toot post "New blog post: $URL"
+            bsky post "New blog post: $URL"
           done
