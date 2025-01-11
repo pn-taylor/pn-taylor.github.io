@@ -65,4 +65,5 @@ plugins:
   - jemoji
 paginate: 6
 paginate_path: "/blog/page:num/"
-  
+# set timezone
+timezone: Australia/Canberra
