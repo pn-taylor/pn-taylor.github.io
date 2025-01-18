@@ -72,8 +72,11 @@ jobs:
           client = Client()
           client.login(username, password)
 
-          # Post each URL
           post_urls = os.getenv("POST_URLS").splitlines()
           for url in post_urls:
-              client.send_post(f"New blog post: {url}")
+            # Ensure the URL is formatted correctly
+            formatted_url = url.strip()
+
+            # Send the post with the formatted URL
+            client.send_post(f"New blog post: {formatted_url}")
           EOF
