@@ -4,7 +4,7 @@ post_to_socials: true
 featured_image: '/images/blog_images/aus_pol.jpg'
 title: Looking At The World
 tags: life, politics, australia, usa
-excerpt: 
+excerpt: You can't go too far in the world at the moment without there being some influence from the US and their politics. Doubly so now that we've had our own election called and so what to do about Trump and his politics is even more in the spot light. Sometimes you sit and watch what Trump and the rest of his crew are up to and wonder just how he was voted back in again.
 ---
 You can't go too far in the world at the moment without there being some influence from the US and their politics. Doubly so now that we've had our own election called and so what to do about Trump and his politics is even more in the spot light. Sometimes you sit and watch what Trump and the rest of his crew are up to and wonder just how he was voted back in again. I get that lots of people, these days, can feel disenfranchised and unrepresented in modern day politics. I stand by my belief that once being a politician was a career as opposed to a civic duty the representation went with it. Once those who we representing their constituency no longer had their own job or business to consider when passing policies that affected the masses I feel as though we allowed them to govern without fear.
 
