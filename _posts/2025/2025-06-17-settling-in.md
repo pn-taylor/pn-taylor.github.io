@@ -1,6 +1,6 @@
 ---
 category: general
-post_to_socials: true
+post_to_socials: false
 featured_image: '/images/blog_images/winterice.jpg'
 title: Moving On
 tags: life, australia, family, weather, season, winter, moving, feelings, update, ramblings
