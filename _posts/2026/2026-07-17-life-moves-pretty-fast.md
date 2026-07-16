@@ -1,10 +1,10 @@
 ---
 category: general
-post_to_socials: false
+post_to_socials: true
 featured_image: '/images/blog_images/light_trails.jpg'
 title: Life Moves Pretty Fast
 tags: life, australia, family, summer, feelings, update, ramblings
-excerpt: 
+excerpt: I had intended to post a bit more this year having, mostly, managed a post every month or two last year. However, this year has been a bit more full on than I'd anticipated and, in all honesty, writing has been the furthest from my mind.
 ---
 
 I had intended to post a bit more this year having, mostly, managed a post every month or two last year. However, this year has been a bit more full on than I'd anticipated and, in all honesty, writing has been the furthest from my mind. I haven't written a review in ages (but have one on the go at the moment) and whilst there's clearly things been going on my life, I haven't really wanted to share much if I'm honest.
