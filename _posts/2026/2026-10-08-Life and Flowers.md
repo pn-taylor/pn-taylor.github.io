@@ -1,7 +1,7 @@
 ---
 category: general
 post_to_socials: true
-featured_image: '/images/blog_images/Floriade.jpg'
+featured_image: '/images/blog_images/Floriade_2026.jpg'
 title: Life and Flowers
 tags: life, australia, family, spring, feelings, update, ramblings, floriade, canberra
 excerpt: Spring has very much been in full effect for a while. Between pollen being everywhere and the temperatures, generally, warming, we're slowly making our way towards what looks to be a very hot summer. El Nino is going wreak havoc by all accounts, I just hope we don't have fires similar to those that hit just before COVID.
