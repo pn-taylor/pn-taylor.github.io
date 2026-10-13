@@ -1,0 +1,107 @@
+name: Announce new post
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "_posts/**"
+  workflow_dispatch:
+    inputs:
+      post:
+        description: "Post to announce, e.g. _posts/2026/2026-10-08-Life and Flowers.md"
+        required: true
+      targets:
+        description: "Where to post"
+        type: choice
+        options:
+          - both
+          - bluesky
+          - mastodon
+        default: both
+
+permissions:
+  contents: read
+
+concurrency:
+  group: announce-new-post
+  cancel-in-progress: false
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    outputs:
+      posts: ${{ steps.detect.outputs.posts }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          # Full history (without file contents) so we can diff the whole push.
+          fetch-depth: 0
+          filter: blob:none
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - run: pip install pyyaml==6.0.3
+
+      - name: Find new posts flagged for socials
+        id: detect
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+          MANUAL_POST: ${{ inputs.post }}
+        run: python .github/scripts/announce.py detect
+
+      - name: Wait for posts to go live
+        if: steps.detect.outputs.posts != '[]'
+        env:
+          POSTS: ${{ steps.detect.outputs.posts }}
+        run: python .github/scripts/announce.py wait
+
+  bluesky:
+    needs: detect
+    if: needs.detect.outputs.posts != '[]' && (github.event_name == 'push' || inputs.targets != 'mastodon')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - run: pip install pyyaml==6.0.3 atproto==0.0.72 pillow==12.3.0
+
+      - name: Post to Bluesky
+        env:
+          POSTS: ${{ needs.detect.outputs.posts }}
+          BLUESKY_USERNAME: ${{ secrets.BLUESKY_USERNAME }}
+          BLUESKY_PASSWORD: ${{ secrets.BLUESKY_PASSWORD }}
+        run: python .github/scripts/announce.py bluesky
+
+  mastodon:
+    needs: detect
+    if: needs.detect.outputs.posts != '[]' && (github.event_name == 'push' || inputs.targets != 'bluesky')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - run: pip install pyyaml==6.0.3 toot==0.52.1
+
+      - name: Configure toot
+        env:
+          TOOT_CONFIG: ${{ secrets.MASTODON_CONFIG }}
+        run: |
+          mkdir -p ~/.config/toot
+          printf '%s' "$TOOT_CONFIG" > ~/.config/toot/config.json
+          chmod 600 ~/.config/toot/config.json
+
+      - name: Post to Mastodon
+        env:
+          POSTS: ${{ needs.detect.outputs.posts }}
+        run: python .github/scripts/announce.py mastodon
