@@ -3,7 +3,7 @@ category: general
 post_to_socials: false
 featured_image: '/images/blog_images/winterice.jpg'
 title: Settling In
-tags: life, australia, family, weather, season, winter, moving, feelings, update, ramblings
+tags: [life, australia, family, weather, season, winter, moving, feelings, update, ramblings]
 excerpt:
 ---
 

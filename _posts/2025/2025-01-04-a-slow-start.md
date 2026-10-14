@@ -3,7 +3,7 @@ category: General
 post_to_socials: true
 featured_image: '/images/blog_images/StarsThunder-2024.jpg'
 title: A Slow Start
-tags: life, family, friends, sport
+tags: [life, family, friends, sport]
 excerpt: So the new year has gotten of to a typically slow start. We've mostly just hung out, played Minecraft and enjoyed each other's company. We did spend a lovely evening with friends yesterday though it was curtailed somewhat by a brief storm and rain. Nine spent a good chunk of time splashing around in the lake though, for safety, I made sure a shower was had when we got home as you just never know with public lakes. Ten joined in for a bit but then came back to where we were hanging out and chatted which was lovely.
 ---
 

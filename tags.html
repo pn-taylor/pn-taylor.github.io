@@ -1,0 +1,55 @@
+---
+layout: default
+title: Tags
+permalink: /tags/
+description: Every tag on the blog, and the posts under each one.
+featured_image: /images/demo/demo-landscape.jpg
+---
+
+<section class="intro">
+
+	<div class="wrap">
+
+		<h1>Tags</h1>
+		<p>Pick a tag to see every post about it.</p>
+
+	</div>
+
+</section>
+
+<section class="single tags-page">
+
+	<div class="wrap">
+
+		{% comment %}
+			Not in the menu: reached from the tag links under each post (/tags/#football).
+			Every tag's list is on the page; CSS shows only the one in the URL (:target).
+		{% endcomment %}
+		{% assign tags = site.tags | sort %}
+
+		<nav class="review-categories tag-cloud">
+			{% for tag in tags %}
+			{% assign count = tag[1].size %}
+			<a href="#{{ tag[0] | slugify }}" class="tag-cloud__tag{% if count >= 8 %} tag-cloud__tag--4{% elsif count >= 4 %} tag-cloud__tag--3{% elsif count >= 2 %} tag-cloud__tag--2{% endif %}">{{ tag[0] }} <span>{{ count }}</span></a>
+			{% endfor %}
+		</nav>
+
+		<p class="tags-hint">Choose a tag above.</p>
+
+		{% for tag in tags %}
+		<section class="archive-year tag-section" id="{{ tag[0] | slugify }}">
+
+			<h2 class="review-heading">{{ tag[0] }} <span>{{ tag[1].size }} {% if tag[1].size == 1 %}post{% else %}posts{% endif %}</span></h2>
+
+			<ul class="archive-list">
+				{% for post in tag[1] %}
+				{% include archive-item.html post=post %}
+				{% endfor %}
+			</ul>
+
+		</section>
+		{% endfor %}
+
+	</div>
+
+</section>

@@ -1,0 +1,36 @@
+{% comment %}
+  One row in the archive and tag lists: date | title + blurb | thumbnail.
+  Usage: {% include archive-item.html post=post %}  (works for posts and reviews)
+{% endcomment %}
+{% assign post = include.post %}
+{% comment %} Short ordinal date, e.g. 1st Jan, 22nd Feb, 13th Mar {% endcomment %}
+{% assign day = post.date | date: "%-d" | plus: 0 %}
+{% assign last_digit = day | modulo: 10 %}
+{% if day >= 11 and day <= 13 %}{% assign suffix = "th" %}
+{% elsif last_digit == 1 %}{% assign suffix = "st" %}
+{% elsif last_digit == 2 %}{% assign suffix = "nd" %}
+{% elsif last_digit == 3 %}{% assign suffix = "rd" %}
+{% else %}{% assign suffix = "th" %}{% endif %}
+<li>
+	<time datetime="{{ post.date | date_to_xmlschema }}">{{ day }}{{ suffix }} {{ post.date | date: "%b" }}</time>
+	{% if post.collection == "reviews" %}
+	{% comment %} Reviews: cover as the thumbnail (featured_image is just the header default), verdict as the blurb {% endcomment %}
+	{% assign thumb = post.cover %}
+	{% assign blurb = post.verdict | default: post.excerpt %}
+	{% else %}
+	{% assign thumb = post.featured_image %}
+	{% assign blurb = post.excerpt %}
+	{% endif %}
+	<div class="archive-list__body">
+		<a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+		{% if post.collection == "reviews" %}
+		<span class="archive-list__review">Review{% if post.category %} · {{ post.category }}{% endif %}{% if post.rating %} {% include stars.html rating=post.rating %}{% endif %}</span>
+		{% endif %}
+		<p>{{ blurb | strip_html | normalize_whitespace | truncatewords: 30 }}</p>
+	</div>
+	{% if thumb %}
+	<a href="{{ post.url | relative_url }}" class="archive-list__thumb" tabindex="-1" aria-hidden="true">
+		<img src="{{ thumb | relative_url }}" alt="" loading="lazy">
+	</a>
+	{% endif %}
+</li>

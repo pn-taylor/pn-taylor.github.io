@@ -3,7 +3,7 @@ category: General
 post_to_socials: true
 featured_image: '/images/blog_images/20250208_075742-min.jpg'
 title: Party Times
-tags: life, 2025, party, adventures, travel, animals, beach
+tags: [life, party, adventures, travel, animals, beach]
 excerpt: It's been a busy month or so. I hosted a birthday party (the first on my own), the girls and I took a road trip to the beach and back via the Zoo and then there's been a decent amount of life admin as well. All-in-all I'm pretty proud of myself as certain aspects of life feel a bit more on-track than they used to be. With that being said, however, I've been having a few more moments than I used to where the reality of my situation kind of hits.
 ---
 

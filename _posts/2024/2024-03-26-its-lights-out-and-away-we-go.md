@@ -2,7 +2,7 @@
 category: General
 featured_image: '/images/melbourne-f1_2024/PXL_20240322_013837027.MP-min.jpg'
 title: It's Lights Out And Away We Go!
-tags: life, general, sport, motorsport, 2024
+tags: [life, general, sport, motorsport]
 excerpt: It's been quite some time since I'd been to a Formula 1 Grand Prix. The last one was in 2005 though it was rather swanking in that it was at Monaco. However, the ticket I had was for general admission and was a lovely present from Cat. She couldn't come with me so I took my good friend Kieran instead and had a great time on race day watching Kimi Räikkönen emerge victorious driving for McLaren. From what I remember it was an entertaining race, well, as far as races at Monaco go, and I really enjoyed the atmosphere that even us plebs up in the cheap seats (so cheap we were standing) felt a part of it.
 ---
 

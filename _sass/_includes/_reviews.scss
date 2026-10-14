@@ -451,3 +451,71 @@
 		}
 	}
 }
+
+
+// Tags page: a cloud of every tag, and the list for whichever one is in the URL
+
+.tag-cloud {
+	margin-bottom: 40px;
+
+	span {
+		margin-left: 4px;
+		color: $text-light-color;
+		font-size: 0.8em;
+	}
+
+	// Bigger the more a tag is used
+	.tag-cloud__tag--2 { font-size: 17px; }
+	.tag-cloud__tag--3 { font-size: 20px; }
+	.tag-cloud__tag--4 { font-size: 24px; }
+}
+
+.tag-section {
+	display: none;
+
+	&:target {
+		display: block;
+	}
+}
+
+.tags-page .tags-hint {
+	color: $text-medium-color;
+	font-size: 15px;
+}
+
+// Hide the hint once a tag is picked
+.tags-page:has(.tag-section:target) .tags-hint {
+	display: none;
+}
+
+
+// Tag links under a post
+
+.single .post-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 40px;
+	padding-top: 25px;
+	border-top: 1px solid $border-color;
+
+	a {
+		padding: 4px 12px;
+		border: 1px solid $border-color;
+		border-radius: 20px;
+		color: $text-medium-color;
+		font-size: 14px;
+		transition: background .2s ease, border-color .2s ease;
+
+		&:before {
+			content: "#";
+			color: $text-light-color;
+		}
+
+		&:hover {
+			background: $background-alt-color;
+			border-color: $accent-color;
+			color: $text-dark-color;
+		}
+	}
+}

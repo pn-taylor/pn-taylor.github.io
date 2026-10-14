@@ -3,7 +3,7 @@ category: general
 post_to_socials: false
 featured_image: '/images/blog_images/christmas_tree.jpg'
 title: Another Orbit Complete
-tags: life, australia, family, weather, season, summer, feelings, update, ramblings
+tags: [life, australia, family, weather, season, summer, feelings, update, ramblings]
 excerpt: Another year and another solo Christmas complete, it's also been another year of change, of new feelings, and a continued desire to move forward with love and kindness.
 ---
 
