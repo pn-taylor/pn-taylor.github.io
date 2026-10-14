@@ -15,7 +15,7 @@ featured_image: /images/demo/demo-landscape.jpg
 
 			<div class="blog-post__header">
 				<h2 class="blog-post__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-				<p class="blog-post__subtitle">{{ post.date | date_to_long_string }}</p>
+				<p class="blog-post__subtitle">{{ post.date | date_to_long_string: "ordinal" }}</p>
 			</div>
 
 			{% if post.featured_image %}

@@ -13,7 +13,7 @@
 
 		<p class="review-entry__meta">
 			{% if r.rating %}{% include stars.html rating=r.rating %}{% endif %}
-			{{ r.creator }}{% if r.category %} · {{ r.category }}{% endif %} · {{ r.date | date_to_long_string }}
+			{{ r.creator }}{% if r.category %} · {{ r.category }}{% endif %} · {{ r.date | date_to_long_string: "ordinal" }}
 		</p>
 
 		<p>{{ r.excerpt | strip_html | truncatewords: 40 }}</p>
