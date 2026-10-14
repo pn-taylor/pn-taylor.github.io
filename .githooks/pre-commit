@@ -1,0 +1,8 @@
+#!/bin/sh
+# Shrink any staged image over 1 MB or wider than 2000px before it's committed.
+# Enable once per clone with: git config core.hooksPath .githooks
+if python3 -c "import PIL" 2>/dev/null; then
+	python3 _scripts/shrink_images.py --staged || exit 1
+else
+	echo "pre-commit: Pillow not installed, skipping image shrinking (pip install pillow)"
+fi
