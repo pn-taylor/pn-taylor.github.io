@@ -4,7 +4,6 @@ post_to_socials: false
 featured_image: '/images/blog_images/autumn.jpg'
 title: Some Good Times
 tags: [life, australia, family, weather, season, autumn, easter]
-excerpt: It's been a pretty busy month by all accounts. The school holidays arrived along with Easter and ANZAC Day, not to me   ntion the run-up to election day here in Australia. Autumn is also in full swing, though warmer than usual. I'm not sure whether I prefer it or not. Still, fewer days using the heating means a cheaper bill so on that front I certainly won't be complaining; doubly so as I'm ever closer to owning my own place.
 ---
 
 It's been a pretty busy month by all accounts. The school holidays arrived along with Easter and ANZAC Day, not to mention the run-up to election day here in Australia. Autumn is also in full swing, though warmer than usual. I'm not sure whether I prefer it or not. Still, fewer days using the heating means a cheaper bill so on that front I certainly won't be complaining; doubly so as I'm ever closer to owning my own place.

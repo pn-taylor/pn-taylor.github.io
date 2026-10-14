@@ -4,7 +4,6 @@ post_to_socials: false
 featured_image: '/images/blog_images/138862462266bdm.jpg'
 title: Stepping Stones
 tags: [life, australia, family, weather, season, winter, moving, feelings, update, ramblings]
-excerpt: It was this blog's anniversary yesterday. I don't actually recall when I went live with one though I suspect it was somewhere around 2002 after I started university in Bristol. Either way, I can be confident I've had one for over twenty years and they've all be updated to varying degrees of regularity.
 ---
 It was this blog's anniversary yesterday. I don't actually recall when I went live with one though I suspect it was somewhere around 2002 after I started university in Bristol. Either way, I can be confident I've had one for over twenty years and they've all be updated to varying degrees of regularity. I was posting at least once a month this year up until about June which was when I moved into my own apartment. Since then, life's been somewhat busy with all sorts of things going on, both good and bad. Ultimately though, it's another case of not really knowing what to write and sometimes being afraid to just commit thoughts to the ether, mostly because I don't like upsetting people.
 

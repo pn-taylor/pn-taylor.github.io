@@ -34,6 +34,14 @@ layout: default
 						{% if page.creator %}<dt>By</dt><dd>{{ page.creator }}</dd>{% endif %}
 						{% if page.category %}<dt>Category</dt><dd>{{ page.category }}</dd>{% endif %}
 						{% if page.platform %}<dt>On</dt><dd>{{ page.platform }}</dd>{% endif %}
+						{% comment %}
+							Anything else, per review type, in front matter order:
+							  details:
+							    Starring: [Cailee Spaeny, David Jonsson]
+							    Runtime: 119 minutes
+							Lists are shown comma-separated.
+						{% endcomment %}
+						{% for item in page.details %}<dt>{{ item[0] }}</dt><dd>{{ item[1] | join: ", " }}</dd>{% endfor %}
 					</dl>
 				</div>
 			</aside>

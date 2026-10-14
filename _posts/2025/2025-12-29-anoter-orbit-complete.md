@@ -4,7 +4,6 @@ post_to_socials: false
 featured_image: '/images/blog_images/christmas_tree.jpg'
 title: Another Orbit Complete
 tags: [life, australia, family, weather, season, summer, feelings, update, ramblings]
-excerpt: Another year and another solo Christmas complete, it's also been another year of change, of new feelings, and a continued desire to move forward with love and kindness.
 ---
 
 Another year and another solo Christmas complete, it's also been another year of change, of new feelings, and a continued desire to move forward with love and kindness. The last of those being something that stayed with me after finishing [Ted Lasso](https://en.wikipedia.org/wiki/Ted_Lasso) which I pretty much binged watched last year. There's a point, towards the end, during a press conference after something quite dramatic happens where the person from the club taking the press conference tells a story; pretty typical for the show. At the end, he admits what his player did was wrong but would choose to show him love and I've kind of taken that to heart (pun intended, I intend my puns!). For me it's the difference between always being angry about a thing and find a way to move past it whilst still accepting how it made you feel.

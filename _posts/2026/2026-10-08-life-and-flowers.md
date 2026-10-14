@@ -4,7 +4,6 @@ post_to_socials: true
 featured_image: '/images/blog_images/Floriade_2026.jpg'
 title: Life and Flowers
 tags: [life, australia, family, spring, feelings, update, ramblings, floriade, canberra]
-excerpt: Spring has very much been in full effect for a while. Between pollen being everywhere and the temperatures, generally, warming, we're slowly making our way towards what looks to be a very hot summer. El Nino is going wreak havoc by all accounts, I just hope we don't have fires similar to those that hit just before COVID.
 ---
 
 Spring has very much been in full effect for a while. Between pollen being everywhere and the temperatures, generally, warming, we're slowly making our way towards what looks to be a very hot summer. El Nino is going wreak havoc by all accounts, I just hope we don't have fires similar to those that hit just before COVID. Weirdly, I can very much see my life in two parts, pre and post-COVID and they were very different. I suppose a lot of people could do the same but it wasn't until relatively recently I sort of looked back and went 'yep, it really did change a lot.' Some of it is obvious, some of it is more interpretive and only recognisable after the fact.

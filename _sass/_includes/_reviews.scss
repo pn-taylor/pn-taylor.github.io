@@ -470,22 +470,57 @@
 	.tag-cloud__tag--4 { font-size: 24px; }
 }
 
+// Smaller headings than the archive's years, so 50-odd tags stay compact
 .tag-section {
-	display: none;
+	margin-bottom: 15px;
 
-	&:target {
-		display: block;
+	h2 {
+		font-size: 26px;
+	}
+
+	summary::after {
+		margin-top: 2px;
 	}
 }
 
-.tags-page .tags-hint {
-	color: $text-medium-color;
-	font-size: 15px;
-}
 
-// Hide the hint once a tag is picked
-.tags-page:has(.tag-section:target) .tags-hint {
-	display: none;
+// Back-to-top button (archive and tags pages)
+
+.back-to-top {
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	z-index: 10;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	border: 1px solid $border-color;
+	border-radius: 50%;
+	background: $background-color;
+	color: $text-medium-color;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(10px);
+	transition: opacity .2s ease, visibility .2s ease, transform .2s ease, border-color .2s ease;
+
+	&--visible {
+		opacity: 1;
+		visibility: visible;
+		transform: none;
+	}
+
+	&:hover {
+		border-color: $accent-color;
+		color: $text-dark-color;
+	}
+
+	@include mq(tabletp) {
+		right: 30px;
+		bottom: 30px;
+	}
 }
 
 

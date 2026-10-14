@@ -1,6 +1,7 @@
 ---
 category: General
 title: Figuring Things Out
+excerpt: "One of the things I've enjoyed about messing around with GitHub pages and Jekyll is getting it to work and, more importantly, understanding how it all fits together. That includes these amazing theme I'm running, Basically Basic. There's been mis-steps, a few choice words and also discovery when I found out I could see the errors that were causing this site to not even load. I had no idea to check actions but when in doubt, click all the buttons!"
 ---
 ## Starting Off
 

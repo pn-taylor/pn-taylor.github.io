@@ -4,7 +4,6 @@ post_to_socials: false
 featured_image: '/images/blog_images/winterice.jpg'
 title: Settling In
 tags: [life, australia, family, weather, season, winter, moving, feelings, update, ramblings]
-excerpt:
 ---
 
 I've been in the new apartment now for a little over a week. It's weird to say it but the quiet is even more deafening with more space. Don't get me wrong, I like the fact that there's three bedrooms, the front room is bigger and that, contrary to my assessment, my white goods weren't too big for their spaces. It's just when the kids aren't around and I'm on my own, the emptiness just feel that much more than it did before. I'll get used to it I'm sure, I did before after I moved out. Then the feelings were more around the realisation of what was happening though intertwined with that was the quiet.
