@@ -1,0 +1,52 @@
+---
+layout: default
+title: Archive
+permalink: /archive/
+description: Every post on the blog, by year.
+featured_image: /images/demo/demo-landscape.jpg
+---
+
+<section class="intro">
+
+	<div class="wrap">
+
+		<h1>Archive</h1>
+		<p>Every post on the blog, by year.</p>
+
+	</div>
+
+</section>
+
+<section class="single">
+
+	<div class="wrap">
+
+		{% comment %} site.posts is already newest first {% endcomment %}
+		{% assign years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+
+		<nav class="review-categories">
+			{% for year in years %}
+			<a href="#{{ year.name }}">{{ year.name }}</a>
+			{% endfor %}
+		</nav>
+
+		{% for year in years %}
+		<section class="archive-year" id="{{ year.name }}">
+
+			<h2 class="review-heading">{{ year.name }} <span>{{ year.size }} {% if year.size == 1 %}post{% else %}posts{% endif %}</span></h2>
+
+			<ul class="archive-list">
+				{% for post in year.items %}
+				<li>
+					<time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %b" }}</time>
+					<a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+				</li>
+				{% endfor %}
+			</ul>
+
+		</section>
+		{% endfor %}
+
+	</div>
+
+</section>

@@ -290,3 +290,64 @@
 	display: block;
 	font-weight: $bold-weight;
 }
+
+
+// Archive page (reuses the review column, headings and year pills)
+
+.archive-year {
+	@include review-column;
+	margin-bottom: 50px;
+
+	h2 {
+		max-width: none;
+	}
+}
+
+// Nested under .archive-year to beat `.single ul`, which would narrow it again
+.archive-year .archive-list {
+	max-width: none;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	li {
+		display: flex;
+		align-items: baseline;
+		gap: 20px;
+		max-width: none;
+		margin: 0;
+		padding: 12px 0;
+		border-bottom: 1px solid $border-color;
+	}
+
+	time {
+		flex: 0 0 60px;
+		color: $text-medium-color;
+		font-size: 15px;
+	}
+
+	a {
+		color: $text-dark-color;
+
+		&:hover {
+			color: darken($accent-color, 30%);
+		}
+	}
+}
+
+// "Browse every post by year" under the home page's Older/Newer buttons
+.archive-link {
+	clear: both;
+	padding: 30px 20px 0;
+	text-align: center;
+	font-size: 15px;
+
+	a {
+		color: $text-medium-color;
+		border-bottom: 1px solid $border-color;
+
+		&:hover {
+			color: $text-dark-color;
+		}
+	}
+}
