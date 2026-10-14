@@ -24,7 +24,7 @@
 		{% if page.description %}{{ page.description | strip_html | normalize_whitespace }}{% else %}{{ page.excerpt | strip_html | normalize_whitespace | truncate: 300 }}{% endif %}
 	{%- endcapture -%}
 	{%- assign page_url = page.url | replace: 'index.html', '' | absolute_url -%}
-	{%- assign social_image = page.featured_image | default: page.cover | default: site.social.default_image | absolute_url -%}
+	{%- assign social_image = page.cover | default: page.featured_image | default: site.social.default_image | absolute_url -%}
 
 	<!-- Page Info -->
 	<link rel="shortcut icon" href="{{ site.data.settings.basic_settings.favicon_image | relative_url }}">

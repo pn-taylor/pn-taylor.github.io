@@ -75,7 +75,7 @@ def post_info(path):
         "label": label,
         "rating": stars(rating) if rating is not None else "",
         "excerpt": str(meta.get("excerpt") or meta.get("verdict") or "").strip(),
-        "image": meta.get("featured_image") or meta.get("cover"),
+        "image": meta.get("cover") or meta.get("featured_image"),
     }
 
 
