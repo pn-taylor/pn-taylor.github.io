@@ -50,7 +50,15 @@ featured_image: /images/demo/demo-landscape.jpg
 				{% else %}{% assign suffix = "th" %}{% endif %}
 				<li>
 					<time datetime="{{ post.date | date_to_xmlschema }}">{{ day }}{{ suffix }} {{ post.date | date: "%b" }}</time>
-					<a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+					<div class="archive-list__body">
+						<a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+						<p>{{ post.excerpt | strip_html | normalize_whitespace | truncatewords: 30 }}</p>
+					</div>
+					{% if post.featured_image %}
+					<a href="{{ post.url | relative_url }}" class="archive-list__thumb" tabindex="-1" aria-hidden="true">
+						<img src="{{ post.featured_image | relative_url }}" alt="" loading="lazy">
+					</a>
+					{% endif %}
 				</li>
 				{% endfor %}
 			</ul>

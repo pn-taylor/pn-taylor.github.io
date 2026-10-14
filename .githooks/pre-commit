@@ -1,6 +1,9 @@
 #!/bin/sh
-# Shrink any staged image over 1 MB or wider than 2000px before it's committed.
+# Shrink any staged image over 1 MB or wider than 2000px before it's committed,
+# and give new posts dated today their real time (instead of midnight).
 # Enable once per clone with: git config core.hooksPath .githooks
+python3 _scripts/stamp_post_time.py --staged || exit 1
+
 if python3 -c "import PIL" 2>/dev/null; then
 	python3 _scripts/shrink_images.py --staged || exit 1
 else
