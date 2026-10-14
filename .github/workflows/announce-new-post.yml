@@ -1,11 +1,8 @@
 name: Announce new post
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "_posts/**"
+  # Called by jekyll.yml after each successful deploy (push or daily schedule).
+  workflow_call:
   workflow_dispatch:
     inputs:
       post:
@@ -49,6 +46,7 @@ jobs:
       - name: Find new posts flagged for socials
         id: detect
         env:
+          EVENT: ${{ github.event_name }}
           BEFORE: ${{ github.event.before }}
           AFTER: ${{ github.sha }}
           MANUAL_POST: ${{ inputs.post }}
@@ -62,7 +60,7 @@ jobs:
 
   bluesky:
     needs: detect
-    if: needs.detect.outputs.posts != '[]' && (github.event_name == 'push' || inputs.targets != 'mastodon')
+    if: needs.detect.outputs.posts != '[]' && (github.event_name != 'workflow_dispatch' || inputs.targets != 'mastodon')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -82,7 +80,7 @@ jobs:
 
   mastodon:
     needs: detect
-    if: needs.detect.outputs.posts != '[]' && (github.event_name == 'push' || inputs.targets != 'bluesky')
+    if: needs.detect.outputs.posts != '[]' && (github.event_name != 'workflow_dispatch' || inputs.targets != 'bluesky')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7

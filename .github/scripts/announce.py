@@ -1,8 +1,12 @@
 """Announce newly published blog posts on Bluesky and Mastodon.
 
 Subcommands (all configured through environment variables, see the workflow):
-  detect    Find posts added by this push (or the one given manually) that
-            have `post_to_socials: true`, and write them to $GITHUB_OUTPUT.
+  detect    Find posts to announce and write them to $GITHUB_OUTPUT. Only
+            posts with `post_to_socials: true` are considered:
+              push      posts added by the push, unless dated in the future
+              schedule  posts dated today (site timezone) that were committed
+                        before today; same-day posts are left to the push run
+              manual    the one post given, whatever its date
   wait      Poll each post's URL until GitHub Pages is serving it.
   bluesky   Post a link card for each post to Bluesky.
   mastodon  Post each link to Mastodon via the toot CLI.
@@ -17,7 +21,9 @@ import sys
 import time
 import urllib.error
 import urllib.request
+from datetime import date, datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import yaml
 
@@ -58,6 +64,31 @@ def post_info(path):
     }
 
 
+def site_timezone():
+    config = yaml.safe_load(Path("_config.yml").read_text(encoding="utf-8")) or {}
+    return ZoneInfo(config.get("timezone") or "UTC")
+
+
+def post_date(path, tz):
+    # Jekyll uses a front matter `date:` if there is one, else the filename.
+    value = front_matter(path).get("date")
+    if isinstance(value, datetime):
+        return (value.astimezone(tz) if value.tzinfo else value).date()
+    if isinstance(value, date):
+        return value
+    if value:
+        return date.fromisoformat(str(value)[:10])
+    return date.fromisoformat(FILENAME_RE.match(Path(path).stem).group(1))
+
+
+def first_committed(path, tz):
+    out = subprocess.run(
+        ["git", "log", "--diff-filter=A", "--format=%cI", "--", path],
+        capture_output=True, text=True, check=True,
+    ).stdout.split()
+    return datetime.fromisoformat(out[-1]).astimezone(tz).date() if out else None
+
+
 def load_posts():
     return [post_info(path) for path in json.loads(os.environ["POSTS"])]
 
@@ -81,11 +112,31 @@ def detect():
         if not Path(manual).is_file():
             sys.exit(f"Post not found: {manual}")
         posts = [manual]
+    elif os.environ.get("EVENT") == "schedule":
+        tz = site_timezone()
+        today = datetime.now(tz).date()
+        print(f"Looking for posts scheduled for {today}")
+        posts = []
+        for p in sorted(str(p) for p in Path(POSTS_DIR).rglob("*") if p.suffix in (".md", ".markdown", ".html")):
+            if post_date(p, tz) != today or front_matter(p).get("post_to_socials") is not True:
+                continue
+            committed = first_committed(p, tz)
+            if committed is None or committed >= today:
+                print(f"Skipping {p}: pushed today, so the push run announced it")
+            else:
+                posts.append(p)
     else:
+        tz = site_timezone()
+        today = datetime.now(tz).date()
         added = git_added_posts(os.environ.get("BEFORE", ""), os.environ["AFTER"])
-        posts = [p for p in added if front_matter(p).get("post_to_socials") is True]
-        for p in sorted(set(added) - set(posts)):
-            print(f"Skipping {p}: post_to_socials is not true")
+        posts = []
+        for p in sorted(added):
+            if front_matter(p).get("post_to_socials") is not True:
+                print(f"Skipping {p}: post_to_socials is not true")
+            elif post_date(p, tz) > today:
+                print(f"Scheduled {p}: will go live and be announced on {post_date(p, tz)}")
+            else:
+                posts.append(p)
 
     for post in map(post_info, posts):
         print(f"Will announce {post['path']} -> {post['url']}")

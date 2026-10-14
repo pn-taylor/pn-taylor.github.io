@@ -11,6 +11,12 @@ on:
   push:
     branches: ["main"]
 
+  # Daily rebuild so future-dated posts go live on their date (Jekyll skips
+  # posts dated after the build). 14:05 UTC is 00:05 in Canberra during
+  # standard time and 01:05 during daylight saving.
+  schedule:
+    - cron: "5 14 * * *"
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -57,3 +63,13 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+
+  # Post newly published posts to Bluesky and Mastodon, once they're live
+  announce:
+    needs: deploy
+    # Manual site rebuilds don't announce; use the "Announce new post" workflow.
+    if: github.event_name != 'workflow_dispatch'
+    uses: ./.github/workflows/announce-new-post.yml
+    permissions:
+      contents: read
+    secrets: inherit
