@@ -1,0 +1,25 @@
+{% assign r = include.review %}
+<article class="review-entry{% if r.cover %} review-entry--cover{% endif %}">
+
+	{% if r.cover %}
+	<a href="{{ r.url | relative_url }}" class="review-entry__cover">
+		<img src="{{ r.cover | relative_url }}" alt="{{ r.cover_alt | default: r.title }}" loading="lazy">
+	</a>
+	{% endif %}
+
+	<div class="review-entry__body">
+
+		<h3><a href="{{ r.url | relative_url }}">{{ r.title }}</a></h3>
+
+		<p class="review-entry__meta">
+			{% if r.rating %}{% include stars.html rating=r.rating %}{% endif %}
+			{{ r.creator }}{% if r.category %} · {{ r.category }}{% endif %} · {{ r.date | date_to_long_string }}
+		</p>
+
+		<p>{{ r.excerpt | strip_html | truncatewords: 40 }}</p>
+
+		<p><a href="{{ r.url | relative_url }}" class="button">Read More</a></p>
+
+	</div>
+
+</article>

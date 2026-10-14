@@ -1,8 +1,8 @@
-"""Announce newly published blog posts on Bluesky and Mastodon.
+"""Announce newly published blog posts and reviews on Bluesky and Mastodon.
 
 Subcommands (all configured through environment variables, see the workflow):
   detect    Find posts to announce and write them to $GITHUB_OUTPUT. Only
-            posts with `post_to_socials: true` are considered:
+            posts and reviews with `post_to_socials: true` are considered:
               push      posts added by the push, unless dated in the future
               schedule  posts dated today (site timezone) that were committed
                         before today; same-day posts are left to the push run
@@ -28,7 +28,12 @@ from zoneinfo import ZoneInfo
 import yaml
 
 SITE_URL = "https://www.pntaylor.net"
-POSTS_DIR = "_posts"
+# Collection folder -> (URL prefix, label the announcement starts with)
+COLLECTIONS = {
+    "_posts": ("blog", "New blog post"),
+    "_reviews": ("review", "New review"),
+}
+EXTENSIONS = (".md", ".markdown", ".html")
 NULL_SHA = "0" * 40
 FILENAME_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})-(.+)$")
 
@@ -49,18 +54,28 @@ def slugify(value):
     return re.sub(r"[\W_]+", "-", str(value)).strip("-").lower()
 
 
+def stars(rating):
+    # "★★★★☆ 4/5"; half ratings round down on the stars, the number is exact.
+    full = max(0, min(5, int(float(rating))))
+    return f"{'★' * full}{'☆' * (5 - full)} {float(rating):g}/5"
+
+
 def post_info(path):
     meta = front_matter(path)
     match = FILENAME_RE.match(Path(path).stem)
     if not match:
         raise ValueError(f"{path} is not named YYYY-MM-DD-title.md")
     name = match.group(2)
+    prefix, label = COLLECTIONS[Path(path).parts[0]]
+    rating = meta.get("rating")
     return {
         "path": path,
-        "url": f"{SITE_URL}/blog/{slugify(meta.get('slug') or name)}",
+        "url": f"{SITE_URL}/{prefix}/{slugify(meta.get('slug') or name)}",
         "title": str(meta.get("title") or name),
-        "excerpt": str(meta.get("excerpt") or "").strip(),
-        "image": meta.get("featured_image"),
+        "label": label,
+        "rating": stars(rating) if rating is not None else "",
+        "excerpt": str(meta.get("excerpt") or meta.get("verdict") or "").strip(),
+        "image": meta.get("featured_image") or meta.get("cover"),
     }
 
 
@@ -102,8 +117,8 @@ def git_added_posts(before, after):
         # First push to the branch, or history was rewritten: fall back to
         # what the head commit itself added.
         cmd = ["git", "diff-tree", "--no-commit-id", "--root", "-r", "-M", "--name-only", "--diff-filter=A", "-z", after]
-    out = subprocess.run(cmd + ["--", POSTS_DIR], capture_output=True, text=True, check=True).stdout
-    return [p for p in out.split("\0") if p.endswith((".md", ".markdown", ".html"))]
+    out = subprocess.run(cmd + ["--", *COLLECTIONS], capture_output=True, text=True, check=True).stdout
+    return [p for p in out.split("\0") if p.endswith(EXTENSIONS)]
 
 
 def detect():
@@ -117,7 +132,8 @@ def detect():
         today = datetime.now(tz).date()
         print(f"Looking for posts scheduled for {today}")
         posts = []
-        for p in sorted(str(p) for p in Path(POSTS_DIR).rglob("*") if p.suffix in (".md", ".markdown", ".html")):
+        found = (p for d in COLLECTIONS for p in Path(d).rglob("*") if p.suffix in EXTENSIONS)
+        for p in sorted(str(p) for p in found):
             if post_date(p, tz) != today or front_matter(p).get("post_to_socials") is not True:
                 continue
             committed = first_committed(p, tz)
@@ -209,7 +225,9 @@ def bluesky():
                 thumb=thumb,
             )
         )
-        text = client_utils.TextBuilder().text("New blog post: ").link(post["title"], post["url"])
+        text = client_utils.TextBuilder().text(f"{post['label']}: ").link(post["title"], post["url"])
+        if post["rating"]:
+            text.text(f" {post['rating']}")
         client.send_post(text, embed=embed)
         print(f"Posted to Bluesky: {post['url']}")
 
@@ -217,7 +235,8 @@ def bluesky():
 def mastodon():
     for post in load_posts():
         # Mastodon builds the link preview itself from the page's metadata.
-        subprocess.run(["toot", "post", f"New blog post: {post['title']}\n\n{post['url']}"], check=True)
+        rating = f" {post['rating']}" if post["rating"] else ""
+        subprocess.run(["toot", "post", f"{post['label']}: {post['title']}{rating}\n\n{post['url']}"], check=True)
         print(f"Posted to Mastodon: {post['url']}")
 
 

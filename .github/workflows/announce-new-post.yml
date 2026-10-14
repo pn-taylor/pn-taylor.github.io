@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       post:
-        description: "Post to announce, e.g. _posts/2026/2026-10-08-Life and Flowers.md"
+        description: "Post or review to announce, e.g. _posts/2026/2026-10-08-life-and-flowers.md or _reviews/2026-10-14-a-wrinkle-in-time.md"
         required: true
       targets:
         description: "Where to post"

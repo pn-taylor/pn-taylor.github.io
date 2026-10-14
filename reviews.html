@@ -1,0 +1,73 @@
+---
+layout: default
+title: Reviews
+permalink: /reviews/
+description: Books, films and gadgets, with a rating out of five.
+---
+
+<section class="intro">
+
+	<div class="wrap">
+
+		<h1>Reviews</h1>
+		<p>Books, films and gadgets, with a rating out of five.</p>
+
+	</div>
+
+</section>
+
+<section class="single">
+
+	<div class="wrap">
+
+		{% assign sorted = site.reviews | sort: "date" | reverse %}
+		{% assign groups = sorted | group_by: "category" | sort: "name" %}
+
+		{% if groups.size > 1 %}
+
+		{% comment %} More than one category: latest few in full, then a shelf per category {% endcomment %}
+
+		<h2 class="review-heading">Latest</h2>
+		{% for r in sorted limit: 3 %}
+		{% include review-entry.html review=r %}
+		{% endfor %}
+
+		<nav class="review-categories">
+			{% for group in groups %}
+			<a href="#{{ group.name | default: 'other' | slugify }}">{{ group.name | default: "Other" }}</a>
+			{% endfor %}
+		</nav>
+
+		{% for group in groups %}
+		<section class="review-shelf" id="{{ group.name | default: 'other' | slugify }}">
+
+			<h2 class="review-heading">{{ group.name | default: "Other" }} <span>{{ group.size }}</span></h2>
+
+			<div class="review-shelf__grid">
+				{% for r in group.items %}
+				<a class="review-card" href="{{ r.url | relative_url }}">
+					{% if r.cover %}
+					<img class="review-card__cover" src="{{ r.cover | relative_url }}" alt="{{ r.cover_alt | default: r.title }}" loading="lazy">
+					{% else %}
+					<span class="review-card__cover review-card__cover--blank">{{ r.title }}</span>
+					{% endif %}
+					<span class="review-card__title">{{ r.title }}</span>
+					{% if r.rating %}{% include stars.html rating=r.rating %}{% endif %}
+				</a>
+				{% endfor %}
+			</div>
+
+		</section>
+		{% endfor %}
+
+		{% else %}
+
+		{% for r in sorted %}
+		{% include review-entry.html review=r %}
+		{% endfor %}
+
+		{% endif %}
+
+	</div>
+
+</section>

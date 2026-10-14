@@ -1,0 +1,4 @@
+{% assign full = include.rating | floor %}
+<span class="stars" role="img" aria-label="{{ include.rating }} out of 5">
+  {% for i in (1..5) %}{% if i <= full %}★{% else %}<span class="off">★</span>{% endif %}{% endfor %}
+</span>

@@ -1,0 +1,70 @@
+---
+layout: default
+---
+
+<section class="intro">
+
+	<div class="wrap">
+
+		<h1>{{ page.title }}</h1>
+		<p>{% if page.category %}{{ page.category }} review · {% endif %}{{ page.date | date_to_long_string }}</p>
+
+	</div>
+
+</section>
+
+<section class="single">
+
+	<div class="wrap">
+
+		<div class="review">
+
+			<aside class="review-summary{% unless page.cover %} review-summary--no-cover{% endunless %}">
+				{% if page.cover %}
+				<img class="review-summary__cover" src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | default: page.title }}">
+				{% endif %}
+				<div class="review-summary__details">
+					{% if page.rating %}
+					<p class="review-summary__score">
+						{% include stars.html rating=page.rating %}
+						<span>{{ page.rating }} out of 5</span>
+					</p>
+					{% endif %}
+					<dl>
+						{% if page.creator %}<dt>By</dt><dd>{{ page.creator }}</dd>{% endif %}
+						{% if page.category %}<dt>Category</dt><dd>{{ page.category }}</dd>{% endif %}
+						{% if page.platform %}<dt>On</dt><dd>{{ page.platform }}</dd>{% endif %}
+					</dl>
+				</div>
+			</aside>
+
+			{{ page.content }}
+
+			{% if page.verdict %}
+			<p class="review-verdict"><strong>Verdict:</strong> {{ page.verdict }}</p>
+			{% endif %}
+
+			{% if page.pros or page.cons %}
+			<div class="review-proscons">
+				{% if page.pros %}
+				<div>
+					<h4>What worked</h4>
+					<ul>{% for p in page.pros %}<li>{{ p }}</li>{% endfor %}</ul>
+				</div>
+				{% endif %}
+				{% if page.cons %}
+				<div>
+					<h4>What didn't</h4>
+					<ul>{% for c in page.cons %}<li>{{ c }}</li>{% endfor %}</ul>
+				</div>
+				{% endif %}
+			</div>
+			{% endif %}
+
+			<p class="review-back"><a href="{{ '/reviews/' | relative_url }}">Back to all reviews</a></p>
+
+		</div>
+
+	</div>
+
+</section>
