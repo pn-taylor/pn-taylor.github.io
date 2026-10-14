@@ -124,6 +124,22 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
 	<script src="{{ '/js/plugins-min.js' | relative_url }}"></script>
 	<script src="{{ '/js/journal-min.js' | relative_url }}"></script>
+	<script>
+		// Archive page: a link to a folded-up year (e.g. #2022) opens it.
+		// Lives here rather than in archive.html because AJAX page loads don't run page scripts.
+		(function () {
+			function openTarget(hash) {
+				var el = hash && document.getElementById(decodeURIComponent(hash.slice(1)));
+				if (el && el.tagName === 'DETAILS') el.open = true;
+			}
+			document.addEventListener('click', function (e) {
+				var a = e.target.closest && e.target.closest('a[href^="#"]');
+				if (a) openTarget(a.getAttribute('href'));
+			});
+			window.addEventListener('hashchange', function () { openTarget(location.hash); });
+			openTarget(location.hash);
+		})();
+	</script>
 
 	{% if site.data.settings.advanced_settings.footer_js %}
 	<!-- Extra Footer JS Code -->

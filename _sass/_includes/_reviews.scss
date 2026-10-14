@@ -296,17 +296,50 @@
 
 .archive-year {
 	@include review-column;
-	margin-bottom: 50px;
+	margin-bottom: 30px;
+
+	summary {
+		display: flex;
+		align-items: center;
+		gap: 15px;
+		cursor: pointer;
+		list-style: none;
+
+		&::-webkit-details-marker {
+			display: none;
+		}
+
+		// Chevron: points right when closed, down when open
+		&::after {
+			content: "";
+			width: 10px;
+			height: 10px;
+			margin-top: 8px;
+			border-right: 2px solid $text-light-color;
+			border-bottom: 2px solid $text-light-color;
+			transform: rotate(-45deg);
+			transition: transform .2s ease;
+		}
+
+		&:hover::after {
+			border-color: $text-dark-color;
+		}
+	}
+
+	&[open] summary::after {
+		transform: rotate(45deg);
+	}
 
 	h2 {
 		max-width: none;
+		margin: 0;
 	}
 }
 
 // Nested under .archive-year to beat `.single ul`, which would narrow it again
 .archive-year .archive-list {
 	max-width: none;
-	margin: 0;
+	margin: 10px 0 0;
 	padding: 0;
 	list-style: none;
 
@@ -321,7 +354,7 @@
 	}
 
 	time {
-		flex: 0 0 60px;
+		flex: 0 0 75px;
 		color: $text-medium-color;
 		font-size: 15px;
 	}

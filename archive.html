@@ -30,21 +30,32 @@ featured_image: /images/demo/demo-landscape.jpg
 			{% endfor %}
 		</nav>
 
+		{% comment %} Each year folds up; only the newest starts open {% endcomment %}
 		{% for year in years %}
-		<section class="archive-year" id="{{ year.name }}">
+		<details class="archive-year" id="{{ year.name }}"{% if forloop.first %} open{% endif %}>
 
-			<h2 class="review-heading">{{ year.name }} <span>{{ year.size }} {% if year.size == 1 %}post{% else %}posts{% endif %}</span></h2>
+			<summary>
+				<h2 class="review-heading">{{ year.name }} <span>{{ year.size }} {% if year.size == 1 %}post{% else %}posts{% endif %}</span></h2>
+			</summary>
 
 			<ul class="archive-list">
 				{% for post in year.items %}
+				{% comment %} Short ordinal date, e.g. 1st Jan, 22nd Feb, 13th Mar {% endcomment %}
+				{% assign day = post.date | date: "%-d" | plus: 0 %}
+				{% assign last_digit = day | modulo: 10 %}
+				{% if day >= 11 and day <= 13 %}{% assign suffix = "th" %}
+				{% elsif last_digit == 1 %}{% assign suffix = "st" %}
+				{% elsif last_digit == 2 %}{% assign suffix = "nd" %}
+				{% elsif last_digit == 3 %}{% assign suffix = "rd" %}
+				{% else %}{% assign suffix = "th" %}{% endif %}
 				<li>
-					<time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %b" }}</time>
+					<time datetime="{{ post.date | date_to_xmlschema }}">{{ day }}{{ suffix }} {{ post.date | date: "%b" }}</time>
 					<a href="{{ post.url | relative_url }}">{{ post.title }}</a>
 				</li>
 				{% endfor %}
 			</ul>
 
-		</section>
+		</details>
 		{% endfor %}
 
 	</div>
