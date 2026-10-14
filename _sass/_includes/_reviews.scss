@@ -402,6 +402,18 @@
 	}
 }
 
+// "Review · Film ★★★★★" tag after a review's title
+.archive-list__review {
+	margin-left: 8px;
+	color: $text-medium-color;
+	font-size: 13px;
+	white-space: nowrap;
+
+	.stars {
+		margin-left: 4px;
+	}
+}
+
 .archive-list__thumb {
 	grid-column: 3;
 	display: block;

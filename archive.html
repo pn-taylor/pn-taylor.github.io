@@ -2,7 +2,7 @@
 layout: default
 title: Archive
 permalink: /archive/
-description: Every post on the blog, by year.
+description: Every post and review on the blog, by year.
 featured_image: /images/demo/demo-landscape.jpg
 ---
 
@@ -11,7 +11,7 @@ featured_image: /images/demo/demo-landscape.jpg
 	<div class="wrap">
 
 		<h1>Archive</h1>
-		<p>Every post on the blog, by year.</p>
+		<p>Every post and review on the blog, by year.</p>
 
 	</div>
 
@@ -21,8 +21,9 @@ featured_image: /images/demo/demo-landscape.jpg
 
 	<div class="wrap">
 
-		{% comment %} site.posts is already newest first {% endcomment %}
-		{% assign years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+		{% comment %} Posts and reviews together, newest first {% endcomment %}
+		{% assign entries = site.posts | concat: site.reviews | sort: "date" | reverse %}
+		{% assign years = entries | group_by_exp: "post", "post.date | date: '%Y'" %}
 
 		<nav class="review-categories">
 			{% for year in years %}
@@ -35,7 +36,13 @@ featured_image: /images/demo/demo-landscape.jpg
 		<details class="archive-year" id="{{ year.name }}"{% if forloop.first %} open{% endif %}>
 
 			<summary>
-				<h2 class="review-heading">{{ year.name }} <span>{{ year.size }} {% if year.size == 1 %}post{% else %}posts{% endif %}</span></h2>
+				{% assign review_count = year.items | where: "collection", "reviews" | size %}
+				{% assign post_count = year.size | minus: review_count %}
+				<h2 class="review-heading">{{ year.name }} <span>
+					{%- if post_count > 0 %}{{ post_count }} {% if post_count == 1 %}post{% else %}posts{% endif %}{% endif -%}
+					{%- if post_count > 0 and review_count > 0 %} · {% endif -%}
+					{%- if review_count > 0 %}{{ review_count }} {% if review_count == 1 %}review{% else %}reviews{% endif %}{% endif -%}
+				</span></h2>
 			</summary>
 
 			<ul class="archive-list">
@@ -50,13 +57,24 @@ featured_image: /images/demo/demo-landscape.jpg
 				{% else %}{% assign suffix = "th" %}{% endif %}
 				<li>
 					<time datetime="{{ post.date | date_to_xmlschema }}">{{ day }}{{ suffix }} {{ post.date | date: "%b" }}</time>
+					{% if post.collection == "reviews" %}
+					{% comment %} Reviews: cover as the thumbnail (featured_image is just the header default), verdict as the blurb {% endcomment %}
+					{% assign thumb = post.cover %}
+					{% assign blurb = post.verdict | default: post.excerpt %}
+					{% else %}
+					{% assign thumb = post.featured_image %}
+					{% assign blurb = post.excerpt %}
+					{% endif %}
 					<div class="archive-list__body">
 						<a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-						<p>{{ post.excerpt | strip_html | normalize_whitespace | truncatewords: 30 }}</p>
+						{% if post.collection == "reviews" %}
+						<span class="archive-list__review">Review{% if post.category %} · {{ post.category }}{% endif %}{% if post.rating %} {% include stars.html rating=post.rating %}{% endif %}</span>
+						{% endif %}
+						<p>{{ blurb | strip_html | normalize_whitespace | truncatewords: 30 }}</p>
 					</div>
-					{% if post.featured_image %}
+					{% if thumb %}
 					<a href="{{ post.url | relative_url }}" class="archive-list__thumb" tabindex="-1" aria-hidden="true">
-						<img src="{{ post.featured_image | relative_url }}" alt="" loading="lazy">
+						<img src="{{ thumb | relative_url }}" alt="" loading="lazy">
 					</a>
 					{% endif %}
 				</li>

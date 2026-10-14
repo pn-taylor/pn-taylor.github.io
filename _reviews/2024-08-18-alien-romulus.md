@@ -1,9 +1,17 @@
 ---
-category: Reviews
-featured_image: '/images/blog_images/alien-romulus-logo.png'
-title: 'Alien: Romulus - Review'
-tags: reviews, movies, 'Alien franchise','Alien Romulus', thoughts
-excerpt: "I'm a big fan of the Alien franchise, with my absolute favourite being Aliens, so much so I backed the excellent documentary, Aliens: Expanded. It's a four-hour long documentary filled with some really interesting stories, anecdotes and it was a fascinating watch. If you're a fan, it's worth the purchase. Anyway, when I heard that a new Alien movie was on the way I was both happy and apprehensive. Much like the Predator franchise, recent installments had been lacklustre, however, the existance of Prey filled me with a little bit of hope that, in the right hands, we might get a decent movie. So knowing that director Fede Álvarez's history being in horror movies, those feelings of hope increase and, after watching the movie this past week, I'm glad to report that we finally have a movie that adds to the franchise rather than detracts."
+title: "Alien: Romulus"
+date: 2024-08-18
+rating: 5
+cover: /images/reviews/alien-romulus.jpg
+cover_alt: "Alien: Romulus title logo"
+creator: Fede Álvarez
+category: Film
+platform: Cinema
+verdict: By far the best entry in the franchise since Aliens
+pros: ["Tells its own story within the Alien timeline", "Action packed, with some fun callbacks", "Tight story driven by Rain"]
+cons: ["Some callbacks are a bit cringy", "Side characters are a little thin"]
+# Was a blog post before reviews existed; keep the old link working
+redirect_from: /blog/alien-romulus-review
 ---
 I'm a big fan of the Alien franchise, with my absolute favourite being Aliens, so much so I backed the excellent documentary, [Aliens: Expanded](https://aliens-expanded.com/). It's a four-hour long documentary filled with some really interesting stories, anecdotes and it was a fascinating watch. If you're a fan, it's worth the purchase. Anyway, when I heard that a new Alien movie was on the way I was both happy and apprehensive. Much like the Predator franchise, recent installments had been lacklustre, however, the existance of [Prey](https://www.imdb.com/title/tt11866324/) filled me with a little bit of hope that, in the right hands, we might get a decent movie. So knowing that director Fede Álvarez's history being in horror movies, those feelings of hope increased and, after watching the movie this past week, I'm glad to report that we finally have a movie that adds to the franchise rather than detracts.
 

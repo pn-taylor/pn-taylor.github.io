@@ -63,6 +63,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-feed
   - jemoji
+  - jekyll-redirect-from
 paginate: 6
 # Reviews get their own feed at /feed/reviews.xml (the main feed is blog posts)
 feed:
