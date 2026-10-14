@@ -7,6 +7,10 @@ cover_alt: "Alien: Romulus title logo"
 creator: Fede Álvarez
 category: Film
 platform: Cinema
+details:
+  Starring: [Cailee Spaeny, David Jonsson, Archie Renaux, Isabela Merced, Spike Fearn, Aileen Wu]
+  Runtime: 119 minutes
+  Rated: MA15+
 verdict: By far the best entry in the franchise since Aliens
 pros: ["Tells its own story within the Alien timeline", "Action packed, with some fun callbacks", "Tight story driven by Rain"]
 cons: ["Some callbacks are a bit cringy", "Side characters are a little thin"]
