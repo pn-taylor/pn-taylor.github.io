@@ -100,7 +100,10 @@ def post_date(path, tz):
         return value
     if value:
         return date.fromisoformat(str(value)[:10])
-    return date.fromisoformat(FILENAME_RE.match(Path(path).stem).group(1))
+    match = FILENAME_RE.match(Path(path).stem)
+    if not match:
+        raise ValueError(f"{path} is not named YYYY-MM-DD-title.md")
+    return date.fromisoformat(match.group(1))
 
 
 def first_committed(path, tz):

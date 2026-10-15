@@ -4,3 +4,4 @@ _site/
 vendor/
 .bundle/
 bazzite.md
+Gemfile.lock
