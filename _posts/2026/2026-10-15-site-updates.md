@@ -6,7 +6,7 @@ title: Site Updates
 tags: [updates, coding, website, changes, ai, thoughts]
 ---
 
-Before I write anything else on this post, I have to be honest here and admit I used AI to assist in a good chunk of these changes. I can't be someone who talks about the negative and downright worrisome trends in regards to AI and not be upfront when I've used it myself. In all honesty, probably using it at all will be hypocritcal to some but I'd like to think I've never shied away from be up front about things. 
+Before I write anything else on this post, I have to be honest here and admit I used AI to assist in a good chunk of these changes. I can't be someone who talks about the negative and downright worrisome trends in regards to AI and not be upfront when I've used it myself. In all honesty, probably using it at all will be hypocritcal to some but I'd like to think I've never shied away from be up front about things.
 
 I do take issue with how prevelent AI is, that users are given no choice when it's shoved into apps, and there's far too many issues with how it's royally fucked up the cost of technology thanks to the AI bubble circlejerk that's currently going on. I could go down the deep, dark conversation around generative AI and how it's messing with us, but that's probably a post all on its own. Less to say without its help, the things I've added to this site over the last few days wouldn't be possible because my knowledge around Jekyll and Ruby is pretty slim and I'm even worse at CSS.
 
