@@ -64,7 +64,7 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v5
 
-  # Post newly published posts to Bluesky and Mastodon, once they're live
+  # Post newly published posts to Bluesky, Mastodon and Threads, once they're live
   announce:
     needs: deploy
     # Manual site rebuilds don't announce; use the "Announce new post" workflow.

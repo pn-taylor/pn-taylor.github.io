@@ -1,0 +1,31 @@
+name: Refresh Threads token
+
+# Threads access tokens expire 60 days after they were last refreshed, and an
+# expired one can't be revived, so swap it for a fresh one every week.
+on:
+  schedule:
+    - cron: "17 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - run: pip install pyyaml==6.0.3
+
+      - name: Refresh token and save it back to the repo secret
+        env:
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+          # Fine-grained PAT for this repo with "Secrets: Read and write".
+          GH_TOKEN: ${{ secrets.SECRETS_WRITE_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: python .github/scripts/announce.py refresh-threads

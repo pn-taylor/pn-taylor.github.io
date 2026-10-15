@@ -41,4 +41,4 @@ Everything is optional except `title` and `rating`.
 | `details` | Any label you like | Extra lines under the cover, in the order written. Lists show comma-separated |
 | `verdict` | **Verdict:** after the review | One line; also used in the archive |
 | `pros` / `cons` | "What worked" / "What didn't" | Lists |
-| `post_to_socials` | | `true` to announce on Bluesky and Mastodon |
+| `post_to_socials` | | `true` to announce on Bluesky, Mastodon and Threads |

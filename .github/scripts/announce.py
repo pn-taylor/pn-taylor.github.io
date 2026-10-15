@@ -1,4 +1,4 @@
-"""Announce newly published blog posts and reviews on Bluesky and Mastodon.
+"""Announce newly published blog posts and reviews on Bluesky, Mastodon and Threads.
 
 Subcommands (all configured through environment variables, see the workflow):
   detect    Find posts to announce and write them to $GITHUB_OUTPUT. Only
@@ -10,6 +10,10 @@ Subcommands (all configured through environment variables, see the workflow):
   wait      Poll each post's URL until GitHub Pages is serving it.
   bluesky   Post a link card for each post to Bluesky.
   mastodon  Post each link to Mastodon via the toot CLI.
+  threads   Post each link to Threads via the Threads API.
+  refresh-threads
+            Swap the Threads access token for a fresh 60-day one and save it
+            back to the repo's THREADS_ACCESS_TOKEN secret with the gh CLI.
 """
 
 import io
@@ -20,6 +24,7 @@ import subprocess
 import sys
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from datetime import date, datetime
 from pathlib import Path
@@ -40,6 +45,8 @@ FILENAME_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})-(.+)$")
 # Bluesky rejects blobs over 1,000,000 bytes; leave some headroom.
 MAX_THUMB_BYTES = 950_000
 MAX_DESCRIPTION = 300
+
+THREADS_API = "https://graph.threads.net"
 
 
 def front_matter(path):
@@ -240,8 +247,57 @@ def mastodon():
         print(f"Posted to Mastodon: {post['url']}")
 
 
+def threads_call(method, path, **params):
+    params["access_token"] = os.environ["THREADS_ACCESS_TOKEN"]
+    query = urllib.parse.urlencode(params)
+    url = f"{THREADS_API}{path}"
+    if method == "GET":
+        req = urllib.request.Request(f"{url}?{query}")
+    else:
+        req = urllib.request.Request(url, data=query.encode(), method=method)
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            return json.load(resp)
+    except urllib.error.HTTPError as err:
+        sys.exit(f"Threads API {path} failed: {err.code} {err.read().decode(errors='replace')}")
+
+
+def threads():
+    if not os.environ.get("THREADS_ACCESS_TOKEN"):
+        print("THREADS_ACCESS_TOKEN is not set, skipping Threads.")
+        return
+    for post in load_posts():
+        # Threads builds the link card itself from the page's metadata.
+        rating = f" {post['rating']}" if post["rating"] else ""
+        container = threads_call(
+            "POST", "/v1.0/me/threads",
+            media_type="TEXT",
+            text=f"{post['label']}: {post['title']}{rating}\n\n{post['url']}",
+            link_attachment=post["url"],
+        )
+        # Meta recommends a short pause before publishing a new container.
+        time.sleep(10)
+        threads_call("POST", "/v1.0/me/threads_publish", creation_id=container["id"])
+        print(f"Posted to Threads: {post['url']}")
+
+
+def refresh_threads():
+    if not os.environ.get("GH_TOKEN"):
+        sys.exit("SECRETS_WRITE_TOKEN is not set, so the refreshed token can't be saved.")
+    token = threads_call("GET", "/refresh_access_token", grant_type="th_refresh_token")["access_token"]
+    print(f"::add-mask::{token}")
+    subprocess.run(
+        ["gh", "secret", "set", "THREADS_ACCESS_TOKEN", "--repo", os.environ["REPO"]],
+        input=token, text=True, check=True,
+    )
+    print("Saved refreshed Threads token.")
+
+
 if __name__ == "__main__":
-    commands = {"detect": detect, "wait": wait, "bluesky": bluesky, "mastodon": mastodon}
+    commands = {
+        "detect": detect, "wait": wait, "bluesky": bluesky, "mastodon": mastodon,
+        "threads": threads, "refresh-threads": refresh_threads,
+    }
     if len(sys.argv) != 2 or sys.argv[1] not in commands:
         sys.exit(f"usage: {sys.argv[0]} {{{','.join(commands)}}}")
     commands[sys.argv[1]]()

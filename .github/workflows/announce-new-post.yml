@@ -12,10 +12,11 @@ on:
         description: "Where to post"
         type: choice
         options:
-          - both
+          - all
           - bluesky
           - mastodon
-        default: both
+          - threads
+        default: all
 
 permissions:
   contents: read
@@ -60,7 +61,7 @@ jobs:
 
   bluesky:
     needs: detect
-    if: needs.detect.outputs.posts != '[]' && (github.event_name != 'workflow_dispatch' || inputs.targets != 'mastodon')
+    if: needs.detect.outputs.posts != '[]' && (github.event_name != 'workflow_dispatch' || inputs.targets == 'all' || inputs.targets == 'bluesky')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -80,7 +81,7 @@ jobs:
 
   mastodon:
     needs: detect
-    if: needs.detect.outputs.posts != '[]' && (github.event_name != 'workflow_dispatch' || inputs.targets != 'bluesky')
+    if: needs.detect.outputs.posts != '[]' && (github.event_name != 'workflow_dispatch' || inputs.targets == 'all' || inputs.targets == 'mastodon')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -103,3 +104,22 @@ jobs:
         env:
           POSTS: ${{ needs.detect.outputs.posts }}
         run: python .github/scripts/announce.py mastodon
+
+  threads:
+    needs: detect
+    if: needs.detect.outputs.posts != '[]' && (github.event_name != 'workflow_dispatch' || inputs.targets == 'all' || inputs.targets == 'threads')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - run: pip install pyyaml==6.0.3
+
+      - name: Post to Threads
+        env:
+          POSTS: ${{ needs.detect.outputs.posts }}
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+        run: python .github/scripts/announce.py threads
