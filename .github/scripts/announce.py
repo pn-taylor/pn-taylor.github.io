@@ -26,7 +26,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -284,8 +284,11 @@ def threads():
 def refresh_threads():
     if not os.environ.get("GH_TOKEN"):
         sys.exit("SECRETS_WRITE_TOKEN is not set, so the refreshed token can't be saved.")
-    token = threads_call("GET", "/refresh_access_token", grant_type="th_refresh_token")["access_token"]
+    result = threads_call("GET", "/refresh_access_token", grant_type="th_refresh_token")
+    token = result["access_token"]
     print(f"::add-mask::{token}")
+    expires = datetime.now(site_timezone()) + timedelta(seconds=int(result["expires_in"]))
+    print(f"New token is valid until {expires:%Y-%m-%d %H:%M %Z} ({int(result['expires_in']) // 86400} days).")
     subprocess.run(
         ["gh", "secret", "set", "THREADS_ACCESS_TOKEN", "--repo", os.environ["REPO"]],
         input=token, text=True, check=True,
