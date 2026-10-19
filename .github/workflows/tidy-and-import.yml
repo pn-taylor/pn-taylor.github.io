@@ -3,6 +3,8 @@ name: Tidy images and import Pixelfed
 # Does on GitHub what the pre-commit hook and _scripts/ do locally, so it
 # happens wherever a post comes from (VS Code at work or home, or Pages CMS):
 #  - after a push with images: shrink anything oversized and commit it back
+#  - after a push with new notes: add the time they were posted (Pages CMS
+#    can only write the date) and commit it back
 #  - every 3 hours: copy new Pixelfed posts in as notes (never announced, as
 #    they're already on the fediverse)
 # A commit made here doesn't start other workflows on its own, so this starts
@@ -11,7 +13,7 @@ name: Tidy images and import Pixelfed
 on:
   push:
     branches: ["main"]
-    paths: ["images/**"]
+    paths: ["images/**", "_notes/**"]
   schedule:
     - cron: "23 */3 * * *"
   workflow_dispatch:
@@ -29,6 +31,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          # History (without file contents) to see what the push added, and when
+          fetch-depth: 0
+          filter: blob:none
 
       - uses: actions/setup-python@v7
         with:
@@ -39,6 +45,10 @@ jobs:
       - name: Import new Pixelfed posts
         if: github.event_name != 'push'
         run: python _scripts/import_pixelfed.py
+
+      - name: Add times to new notes
+        if: github.event_name == 'push'
+        run: python _scripts/stamp_post_time.py --added "${{ github.event.before }}" "${{ github.sha }}"
 
       - name: Shrink oversized images
         run: python _scripts/shrink_images.py
@@ -54,8 +64,10 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          if git diff --cached --name-only | grep -q '^_notes/'; then
+          if git diff --cached --name-only --diff-filter=A | grep -q '^_notes/'; then
             git commit -m "Import new Pixelfed posts as notes"
+          elif git diff --cached --name-only | grep -q '^_notes/'; then
+            git commit -m "Add times to new notes"
           else
             git commit -m "Shrink oversized images"
           fi

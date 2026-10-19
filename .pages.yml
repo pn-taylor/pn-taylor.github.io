@@ -34,12 +34,14 @@ content:
         type: string
         required: true
         description: A few words. Used for the web address, the browser tab and the archive, not shown on the note itself.
+      # Just the day: Pages CMS labels any time it writes as UTC (+0000), which
+      # puts the note hours in the future, and Jekyll won't publish it. The
+      # "Tidy images and import Pixelfed" workflow adds the real time after.
       - name: date
         type: date
         required: true
         options:
-          time: true
-          format: "yyyy-MM-dd HH:mm:ss xx"
+          format: "yyyy-MM-dd"
       - name: body
         label: Words
         type: text

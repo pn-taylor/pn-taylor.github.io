@@ -1,6 +1,6 @@
 ---
 title: A quick post
-date: 2026-10-19 15:48:00 +0000
+date: 2026-10-19 15:48:00 +1100
 tags:
   - updates
   - life

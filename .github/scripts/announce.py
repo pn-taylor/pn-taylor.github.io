@@ -186,6 +186,13 @@ def site_timezone():
 def post_date(path, tz):
     # Jekyll uses a front matter `date:` if there is one, else the filename.
     value = front_matter(path).get("date")
+    if isinstance(value, str):
+        # YAML only understands "+10:00"; Jekyll also takes "+1000", which the
+        # Pixelfed importer writes. Read it the way Jekyll does.
+        try:
+            value = datetime.strptime(value.strip(), "%Y-%m-%d %H:%M:%S %z")
+        except ValueError:
+            pass
     if isinstance(value, datetime):
         return (value.astimezone(tz) if value.tzinfo else value).date()
     if isinstance(value, date):
@@ -273,10 +280,10 @@ def wait():
             try:
                 with urllib.request.urlopen(url, timeout=15) as resp:
                     if resp.status == 200:
-                        print(f"Live: {url}")
+                        print(f"Live: {url}", flush=True)
                         pending.discard(url)
             except (urllib.error.URLError, TimeoutError) as err:
-                print(f"Not live yet: {url} ({err})")
+                print(f"Not live yet: {url} ({err})", flush=True)
         if pending:
             if time.time() > deadline:
                 sys.exit(f"Gave up waiting for: {', '.join(sorted(pending))}")

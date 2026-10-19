@@ -1,7 +1,12 @@
-"""Give new posts and reviews dated today the time they were committed.
+"""Give new posts, reviews and notes dated today the time they were committed.
 
 Usage:
   python3 _scripts/stamp_post_time.py --staged   (used by .githooks/pre-commit)
+  python3 _scripts/stamp_post_time.py --added BEFORE AFTER
+      (used by the "Tidy images and import Pixelfed" workflow) the same for
+      files added between two commits, e.g. a note from Pages CMS, timed by
+      the commit that added each one. Pages CMS can only write the date: the
+      time it writes is labelled UTC, which Jekyll takes as hours in the future.
 
 Without a time Jekyll dates a post at midnight, and that's what link previews
 (e.g. the "14h ago" on a Mastodon card) show. So when a newly added post or
@@ -41,6 +46,22 @@ def added_posts():
     return [Path(p) for p in out.split("\0") if p.startswith(FOLDERS) and p.endswith(EXTENSIONS)]
 
 
+def added_between(before, after):
+    out = subprocess.run(
+        ["git", "diff", "--name-only", "--diff-filter=A", "-z", before, after],
+        capture_output=True, text=True, check=True,
+    ).stdout
+    return [Path(p) for p in out.split("\0") if p.startswith(FOLDERS) and p.endswith(EXTENSIONS)]
+
+
+def committed_at(path, tz):
+    out = subprocess.run(
+        ["git", "log", "--diff-filter=A", "--format=%cI", "-1", "--", str(path)],
+        capture_output=True, text=True, check=True,
+    ).stdout.strip()
+    return datetime.fromisoformat(out).astimezone(tz) if out else datetime.now(tz).replace(microsecond=0)
+
+
 def stamp(path, now):
     text = path.read_text(encoding="utf-8")
     fm = FRONT_MATTER_RE.match(text)
@@ -70,6 +91,12 @@ def stamp(path, now):
 
 
 def main(args):
+    if len(args) == 3 and args[0] == "--added":
+        tz = site_timezone()
+        for p in added_between(args[1], args[2]):
+            if p.is_file():
+                stamp(p, committed_at(p, tz))
+        return
     if args != ["--staged"]:
         sys.exit(__doc__)
     now = datetime.now(site_timezone()).replace(microsecond=0)
