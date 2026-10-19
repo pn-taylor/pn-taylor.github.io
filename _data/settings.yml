@@ -1,7 +1,7 @@
 basic_settings:
   site_title: For Pete's Sake
   site_tagline: Taking my own name in vain.
-  favicon_image: /images/favicon.png
+  favicon_image: /images/blog_images/favicon.png
 
 header_settings:
   logo_image: 
@@ -10,8 +10,10 @@ header_settings:
 
 menu_settings:
   menu_items:
-    - title: 'Latest'
+    - title: 'Blog'
       url: '/'
+    - title: 'Notes'
+      url: '/notes/'
     - title: 'Archive'
       url: '/archive/'
     - title: 'Projects'

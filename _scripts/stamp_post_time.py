@@ -20,7 +20,7 @@ from datetime import date, datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-FOLDERS = ("_posts/", "_reviews/")
+FOLDERS = ("_posts/", "_reviews/", "_notes/")
 EXTENSIONS = (".md", ".markdown", ".html")
 FILENAME_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})-")
 FRONT_MATTER_RE = re.compile(r"\A---\s*\n(.*?\n)---\s*\n", re.S)

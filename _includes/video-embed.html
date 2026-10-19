@@ -1,0 +1,40 @@
+{%- comment -%}
+	A YouTube or Vimeo player from the video's normal address.
+	Usage: {% include video-embed.html url="https://www.youtube.com/watch?v=..." %}
+	Works in notes (their video: field) and anywhere in a post. Other sites, or
+	an address it can't read, fall back to a plain link.
+	The theme's script (journal.js) wraps every YouTube/Vimeo iframe in a box
+	shaped from its width and height, so those must be set or it collapses.
+{%- endcomment -%}
+{%- assign url = include.url | strip -%}
+{%- assign id = "" -%}
+{%- assign shape = "" -%}
+{%- assign width = 560 -%}
+{%- assign height = 315 -%}
+{%- if url contains "youtu.be/" -%}
+	{%- assign id = url | split: "youtu.be/" | last | split: "?" | first -%}
+	{%- assign provider = "youtube" -%}
+{%- elsif url contains "youtube.com/shorts/" -%}
+	{%- assign id = url | split: "shorts/" | last | split: "?" | first -%}
+	{%- assign provider = "youtube" -%}
+	{%- assign shape = " video-embed--tall" -%}
+	{%- assign width = 315 -%}
+	{%- assign height = 560 -%}
+{%- elsif url contains "youtube.com" and url contains "v=" -%}
+	{%- assign id = url | split: "v=" | last | split: "&" | first -%}
+	{%- assign provider = "youtube" -%}
+{%- elsif url contains "vimeo.com/" -%}
+	{%- assign id = url | split: "vimeo.com/" | last | split: "?" | first | split: "/" | first -%}
+	{%- assign provider = "vimeo" -%}
+{%- endif -%}
+{%- if id != "" -%}
+<div class="video-embed{{ shape }}">
+	{%- if provider == "youtube" %}
+	<iframe width="{{ width }}" height="{{ height }}" src="https://www.youtube-nocookie.com/embed/{{ id }}" title="{{ include.title | default: 'YouTube video' | escape }}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	{%- else %}
+	<iframe width="{{ width }}" height="{{ height }}" src="https://player.vimeo.com/video/{{ id }}?dnt=1" title="{{ include.title | default: 'Vimeo video' | escape }}" loading="lazy" allow="fullscreen; picture-in-picture" allowfullscreen></iframe>
+	{%- endif %}
+</div>
+{%- else -%}
+<p><a href="{{ url }}">{{ include.title | default: url }}</a></p>
+{%- endif -%}

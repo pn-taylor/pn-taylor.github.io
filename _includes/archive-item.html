@@ -1,28 +1,31 @@
 {% comment %}
   One row in the archive and tag lists: date | title + blurb | thumbnail.
-  Usage: {% include archive-item.html post=post %}  (works for posts and reviews)
+  Usage: {% include archive-item.html post=post %}  (works for posts, reviews and notes)
 {% endcomment %}
 {% assign post = include.post %}
-{% comment %} Short ordinal date, e.g. 1st Jan, 22nd Feb, 13th Mar {% endcomment %}
-{% assign day = post.date | date: "%-d" | plus: 0 %}
-{% assign last_digit = day | modulo: 10 %}
-{% if day >= 11 and day <= 13 %}{% assign suffix = "th" %}
-{% elsif last_digit == 1 %}{% assign suffix = "st" %}
-{% elsif last_digit == 2 %}{% assign suffix = "nd" %}
-{% elsif last_digit == 3 %}{% assign suffix = "rd" %}
-{% else %}{% assign suffix = "th" %}{% endif %}
 <li>
-	<time datetime="{{ post.date | date_to_xmlschema }}">{{ day }}{{ suffix }} {{ post.date | date: "%b" }}</time>
+	<time datetime="{{ post.date | date_to_xmlschema }}">{% include ordinal-day.html date=post.date %} {{ post.date | date: "%b" }}</time>
 	{% if post.collection == "reviews" %}
 	{% comment %} Reviews: cover as the thumbnail (featured_image is just the header default), verdict as the blurb {% endcomment %}
 	{% assign thumb = post.cover %}
 	{% assign blurb = post.verdict | default: post.excerpt %}
+	{% elsif post.collection == "notes" %}
+	{% comment %} Notes: their own photo (featured_image is just the header default), their words as the blurb {% endcomment %}
+	{% assign thumb = post.image | default: post.images.first.src %}
+	{% assign blurb = post.content | default: post.quote | default: post.link_title | strip_html | strip %}
+	{% comment %} Imported notes take their title from their words, so don't say it twice {% endcomment %}
+	{% assign blurb_start = blurb | remove: "#" | replace: "’", "'" | truncatewords: 4 %}
+	{% assign title_start = post.title | truncatewords: 4 %}
+	{% if blurb_start == title_start %}{% assign blurb = "" %}{% endif %}
 	{% else %}
 	{% assign thumb = post.featured_image %}
 	{% assign blurb = post.excerpt %}
 	{% endif %}
 	<div class="archive-list__body">
 		<a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+		{% if post.collection == "notes" %}
+		<span class="archive-list__review">Note</span>
+		{% endif %}
 		{% if post.collection == "reviews" %}
 		<span class="archive-list__review">Review{% if post.category %} · {{ post.category }}{% endif %}{% if post.rating %} {% include stars.html rating=post.rating %}{% endif %}</span>
 		{% endif %}

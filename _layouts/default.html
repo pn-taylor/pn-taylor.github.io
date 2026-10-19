@@ -24,7 +24,8 @@
 		{% if page.description %}{{ page.description | strip_html | normalize_whitespace }}{% else %}{{ page.excerpt | strip_html | normalize_whitespace | truncate: 300 }}{% endif %}
 	{%- endcapture -%}
 	{%- assign page_url = page.url | replace: 'index.html', '' | absolute_url -%}
-	{%- assign social_image = page.cover | default: page.featured_image | default: site.social.default_image | absolute_url -%}
+	{%- comment -%} A photo note's own picture beats the notes' default header image {%- endcomment -%}
+	{%- assign social_image = page.cover | default: page.image | default: page.featured_image | default: site.social.default_image | absolute_url -%}
 
 	<!-- Page Info -->
 	<link rel="shortcut icon" href="{{ site.data.settings.basic_settings.favicon_image | relative_url }}">
@@ -35,6 +36,7 @@
 	<!-- XML Feed Code -->
 	{% feed_meta %}
 	<link type="application/atom+xml" rel="alternate" href="{{ '/feed/reviews.xml' | absolute_url }}" title="{{ site.data.settings.basic_settings.site_title | xml_escape }}: Reviews" />
+	<link type="application/atom+xml" rel="alternate" href="{{ '/feed/notes.xml' | absolute_url }}" title="{{ site.data.settings.basic_settings.site_title | xml_escape }}: Notes" />
 
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary_large_image">
@@ -127,7 +129,8 @@
 	<script src="{{ '/js/journal-min.js' | relative_url }}"></script>
 	<script>
 		// Archive and tags pages: a link to a folded-up section (e.g. #2022, #football) opens it,
-		// and the back-to-top button appears once you've scrolled a screen down.
+		// the back-to-top button appears once you've scrolled a screen down, the notes
+		// page shows more notes as you near the bottom, and note photos open in a viewer.
 		// Lives here rather than in the pages because AJAX page loads don't run page scripts.
 		(function () {
 			function openTarget(hash) {
@@ -141,9 +144,88 @@
 			window.addEventListener('hashchange', function () { openTarget(location.hash); });
 			openTarget(location.hash);
 
+			// Notes page: show the next few hidden notes, and drop the button once they're all out
+			function showMoreNotes() {
+				var hidden = document.querySelectorAll('.notes .note[hidden]');
+				for (var i = 0; i < hidden.length && i < 5; i++) hidden[i].hidden = false;
+				if (hidden.length <= 5) {
+					var more = document.querySelector('.js-notes-more');
+					if (more) more.remove();
+				}
+			}
+			document.addEventListener('click', function (e) {
+				if (e.target.closest && e.target.closest('.js-notes-more')) showMoreNotes();
+			});
+
+			// Notes: clicking a photo opens it large, with arrows (keys or swipe) through the
+			// rest of that note's photos. Listens in the capture phase so the theme's
+			// AJAX link handler never sees the click and tries to load the image as a page.
+			var viewer, viewerPhotos = [], viewerIndex = 0;
+			function viewerShow(i) {
+				viewerIndex = (i + viewerPhotos.length) % viewerPhotos.length;
+				var link = viewerPhotos[viewerIndex], img = link.querySelector('img');
+				viewer.querySelector('img').src = link.href;
+				viewer.querySelector('img').alt = img ? img.alt : '';
+				viewer.querySelector('.photo-viewer__caption').textContent = img ? img.alt : '';
+				viewer.querySelector('.photo-viewer__count').textContent = viewerPhotos.length > 1 ? (viewerIndex + 1) + ' / ' + viewerPhotos.length : '';
+			}
+			function viewerClose() {
+				viewer.hidden = true;
+				document.documentElement.classList.remove('photo-viewer-open');
+			}
+			function viewerOpen(link) {
+				if (!viewer) {
+					viewer = document.createElement('div');
+					viewer.className = 'photo-viewer';
+					viewer.setAttribute('role', 'dialog');
+					viewer.setAttribute('aria-modal', 'true');
+					viewer.innerHTML = '<img alt=""><p class="photo-viewer__caption"></p><span class="photo-viewer__count"></span>' +
+						'<button type="button" class="photo-viewer__prev" aria-label="Previous photo">&lsaquo;</button>' +
+						'<button type="button" class="photo-viewer__next" aria-label="Next photo">&rsaquo;</button>' +
+						'<button type="button" class="photo-viewer__close" aria-label="Close">&times;</button>';
+					document.body.appendChild(viewer);
+					viewer.addEventListener('click', function (e) {
+						if (e.target.closest('.photo-viewer__prev')) viewerShow(viewerIndex - 1);
+						else if (e.target.closest('.photo-viewer__next')) viewerShow(viewerIndex + 1);
+						else if (e.target.tagName !== 'IMG') viewerClose();
+					});
+					var startX = null;
+					viewer.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+					viewer.addEventListener('touchend', function (e) {
+						var dx = e.changedTouches[0].clientX - startX;
+						if (startX !== null && Math.abs(dx) > 50) viewerShow(viewerIndex + (dx < 0 ? 1 : -1));
+						startX = null;
+					});
+				}
+				var note = link.closest('.note');
+				viewerPhotos = Array.prototype.slice.call((note || document).querySelectorAll('.js-photo'));
+				viewer.classList.toggle('photo-viewer--single', viewerPhotos.length < 2);
+				viewerShow(viewerPhotos.indexOf(link));
+				viewer.hidden = false;
+				document.documentElement.classList.add('photo-viewer-open');
+				viewer.querySelector('.photo-viewer__close').focus();
+			}
+			document.addEventListener('click', function (e) {
+				var link = e.target.closest && e.target.closest('a.js-photo');
+				if (!link) return;
+				e.preventDefault();
+				e.stopPropagation();
+				viewerOpen(link);
+			}, true);
+			document.addEventListener('keydown', function (e) {
+				if (!viewer || viewer.hidden) return;
+				if (e.key === 'Escape') viewerClose();
+				else if (e.key === 'ArrowLeft') viewerShow(viewerIndex - 1);
+				else if (e.key === 'ArrowRight') viewerShow(viewerIndex + 1);
+			});
+
 			window.addEventListener('scroll', function () {
 				var btn = document.querySelector('.back-to-top');
 				if (btn) btn.classList.toggle('back-to-top--visible', window.scrollY > window.innerHeight);
+
+				// Load more notes when the button comes within a screen of view
+				var more = document.querySelector('.js-notes-more');
+				if (more && more.getBoundingClientRect().top < window.innerHeight * 2) showMoreNotes();
 			}, { passive: true });
 		})();
 	</script>

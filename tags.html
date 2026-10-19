@@ -2,7 +2,7 @@
 layout: default
 title: Tags
 permalink: /tags/
-description: Every tag on the blog, and the posts under each one.
+description: Pick a tag and fall down a rabbit hole.
 featured_image: /images/demo/demo-landscape.jpg
 ---
 
@@ -11,7 +11,7 @@ featured_image: /images/demo/demo-landscape.jpg
 	<div class="wrap">
 
 		<h1>Tags</h1>
-		<p>Pick a tag to see every post about it.</p>
+		<p>Pick a tag and fall down a rabbit hole.</p>
 
 	</div>
 
@@ -26,7 +26,20 @@ featured_image: /images/demo/demo-landscape.jpg
 			Each tag folds up like the archive's years; the script in default.html opens
 			the one in the URL, or the one clicked in the cloud.
 		{% endcomment %}
-		{% assign tags = site.tags | sort %}
+		{% comment %}
+			site.tags only knows blog posts, so gather the tags from posts and notes.
+			Each entry is [tag, items], the same shape site.tags gives.
+		{% endcomment %}
+		{% assign docs = site.posts | concat: site.notes %}
+		{% assign names = "" | split: "" %}
+		{% for doc in docs %}{% assign names = names | concat: doc.tags %}{% endfor %}
+		{% assign names = names | uniq | sort %}
+		{% assign tags = "" | split: "" %}
+		{% for name in names %}
+		{% assign items = docs | where_exp: "doc", "doc.tags contains name" | sort: "date" | reverse %}
+		{% assign entry = "" | split: "" | push: name | push: items %}
+		{% assign tags = tags | push: entry %}
+		{% endfor %}
 
 		<nav class="review-categories tag-cloud">
 			{% for tag in tags %}
@@ -39,7 +52,7 @@ featured_image: /images/demo/demo-landscape.jpg
 		<details class="archive-year tag-section" id="{{ tag[0] | slugify }}">
 
 			<summary>
-				<h2 class="review-heading">{{ tag[0] }} <span>{{ tag[1].size }} {% if tag[1].size == 1 %}post{% else %}posts{% endif %}</span></h2>
+				<h2 class="review-heading">{{ tag[0] }} <span>{{ tag[1].size }} {% if tag[1].size == 1 %}item{% else %}items{% endif %}</span></h2>
 			</summary>
 
 			<ul class="archive-list">

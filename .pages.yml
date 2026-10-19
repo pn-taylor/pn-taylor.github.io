@@ -1,0 +1,96 @@
+# Pages CMS (https://pagescms.org): for posting notes from anywhere: a few
+# words, a photo or a set of them, a link, a quote, or any mix.
+# Every note written here is posted to Bluesky, Mastodon and Threads once it's
+# live, unless "Keep off socials" is on (see wants_socials in
+# .github/scripts/announce.py). Blog posts and reviews are written in VS Code,
+# so they're not editable here.
+#
+# Pages CMS drops any front matter key that isn't listed under fields when it
+# saves a file, so every key notes use is listed, the extra ones hidden. That
+# way editing an imported Pixelfed note (or one written in VS Code) keeps them.
+
+media:
+  input: images/notes
+  output: /images/notes
+  rename: safe
+  categories: [image]
+
+content:
+  - name: notes
+    label: Notes
+    type: collection
+    path: _notes
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, date]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Short name
+        type: string
+        required: true
+        description: A few words. Used for the web address, the browser tab and the archive, not shown on the note itself.
+      - name: date
+        type: date
+        required: true
+        options:
+          time: true
+          format: "yyyy-MM-dd HH:mm:ss xx"
+      - name: body
+        label: Words
+        type: text
+        description: Under 300 characters fits Bluesky whole; anything longer is cut short there with a link back to the note.
+      - name: image
+        label: Photo
+        type: image
+      - name: alt
+        label: Photo description
+        type: string
+        description: What's in the photo, for screen readers (and the alt text on socials).
+      - name: images
+        label: Several photos
+        type: object
+        list: true
+        description: Use instead of Photo for a set. The first 4 go to Bluesky and Mastodon.
+        fields:
+          - name: src
+            label: Photo
+            type: image
+          - name: alt
+            label: Description
+            type: string
+      - name: video
+        type: string
+        description: A YouTube or Vimeo address. Plays on the note; socials get it as a link with their own preview.
+      - name: link
+        type: string
+        description: Shown as a card on the note, and on socials.
+      - name: link_title
+        label: Link title
+        type: string
+        description: Optional; otherwise the site's name is shown on the card.
+      - name: quote
+        type: text
+      - name: cite
+        label: Quote by
+        type: string
+      - name: tags
+        type: string
+        list: true
+        description: Lower case. They link to the tags page and go on social posts as hashtags.
+      - name: skip_socials
+        label: Keep off socials
+        type: boolean
+        description: Turn on to keep this note on the site only, instead of posting it to Bluesky, Mastodon and Threads.
+
+      # Set by the Pixelfed importer
+      - name: source
+        type: string
+        hidden: true
+      - name: pixelfed_id
+        type: string
+        hidden: true

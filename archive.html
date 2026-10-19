@@ -2,7 +2,7 @@
 layout: default
 title: Archive
 permalink: /archive/
-description: Every post and review on the blog, by year.
+description: Every post, review and note, year by year. It's all here, for better or worse.
 featured_image: /images/demo/demo-landscape.jpg
 ---
 
@@ -11,7 +11,7 @@ featured_image: /images/demo/demo-landscape.jpg
 	<div class="wrap">
 
 		<h1>Archive</h1>
-		<p>Every post and review on the blog, by year.</p>
+		<p>Every post, review and note, year by year. It's all here, for better or worse.</p>
 
 	</div>
 
@@ -21,8 +21,8 @@ featured_image: /images/demo/demo-landscape.jpg
 
 	<div class="wrap">
 
-		{% comment %} Posts and reviews together, newest first {% endcomment %}
-		{% assign entries = site.posts | concat: site.reviews | sort: "date" | reverse %}
+		{% comment %} Posts, reviews and notes together, newest first {% endcomment %}
+		{% assign entries = site.posts | concat: site.reviews | concat: site.notes | sort: "date" | reverse %}
 		{% assign years = entries | group_by_exp: "post", "post.date | date: '%Y'" %}
 
 		<nav class="review-categories">
@@ -37,12 +37,13 @@ featured_image: /images/demo/demo-landscape.jpg
 
 			<summary>
 				{% assign review_count = year.items | where: "collection", "reviews" | size %}
-				{% assign post_count = year.size | minus: review_count %}
-				<h2 class="review-heading">{{ year.name }} <span>
-					{%- if post_count > 0 %}{{ post_count }} {% if post_count == 1 %}post{% else %}posts{% endif %}{% endif -%}
-					{%- if post_count > 0 and review_count > 0 %} · {% endif -%}
-					{%- if review_count > 0 %}{{ review_count }} {% if review_count == 1 %}review{% else %}reviews{% endif %}{% endif -%}
-				</span></h2>
+				{% assign note_count = year.items | where: "collection", "notes" | size %}
+				{% assign post_count = year.size | minus: review_count | minus: note_count %}
+				{% assign counts = "" | split: "" %}
+				{% if post_count > 0 %}{% capture c %}{{ post_count }} {% if post_count == 1 %}post{% else %}posts{% endif %}{% endcapture %}{% assign counts = counts | push: c %}{% endif %}
+				{% if review_count > 0 %}{% capture c %}{{ review_count }} {% if review_count == 1 %}review{% else %}reviews{% endif %}{% endcapture %}{% assign counts = counts | push: c %}{% endif %}
+				{% if note_count > 0 %}{% capture c %}{{ note_count }} {% if note_count == 1 %}note{% else %}notes{% endif %}{% endcapture %}{% assign counts = counts | push: c %}{% endif %}
+				<h2 class="review-heading">{{ year.name }} <span>{{ counts | join: " · " }}</span></h2>
 			</summary>
 
 			<ul class="archive-list">

@@ -1,0 +1,12 @@
+{%- comment -%}
+	A day of the month with its suffix: 1st, 2nd, 3rd, 11th, 22nd.
+	Usage: {% include ordinal-day.html date=post.date %}
+{%- endcomment -%}
+{%- assign day = include.date | date: "%-d" | plus: 0 -%}
+{%- assign last_digit = day | modulo: 10 -%}
+{%- if day >= 11 and day <= 13 -%}{%- assign suffix = "th" -%}
+{%- elsif last_digit == 1 -%}{%- assign suffix = "st" -%}
+{%- elsif last_digit == 2 -%}{%- assign suffix = "nd" -%}
+{%- elsif last_digit == 3 -%}{%- assign suffix = "rd" -%}
+{%- else -%}{%- assign suffix = "th" -%}{%- endif -%}
+{{ day }}{{ suffix }}

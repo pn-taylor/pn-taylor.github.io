@@ -357,7 +357,8 @@
 	li {
 		display: grid;
 		grid-template-columns: 75px minmax(0, 1fr) 72px;
-		align-items: center;
+		// The date sits level with the title's first line, whether or not there's a blurb
+		align-items: first baseline;
 		gap: 20px;
 		max-width: none;
 		margin: 0;
@@ -370,8 +371,6 @@
 	}
 
 	time {
-		align-self: start;
-		padding-top: 3px;
 		color: $text-medium-color;
 		font-size: 15px;
 	}
@@ -416,6 +415,7 @@
 
 .archive-list__thumb {
 	grid-column: 3;
+	align-self: center;
 	display: block;
 	aspect-ratio: 3 / 2;
 	overflow: hidden;
@@ -542,6 +542,7 @@
 // Previous / all posts / next pills under a post
 
 .single .post-nav {
+	@include review-column;
 	display: grid;
 	grid-template-columns: 1fr;
 	justify-items: center;

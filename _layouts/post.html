@@ -27,26 +27,7 @@ layout: default
 		</p>
 		{% endif %}
 
-		{% comment %} Empty placeholders keep the three pills in place on the first and latest posts {% endcomment %}
-		<nav class="post-nav" aria-label="More posts">
-			{% if page.previous %}
-			<a class="post-nav-prev" href="{{ page.previous.url | relative_url }}" title="{{ page.previous.title | escape }}">
-				<span>&larr; Previous</span>
-				<strong>{{ page.previous.title }}</strong>
-			</a>
-			{% else %}
-			<div class="post-nav-prev"></div>
-			{% endif %}
-			<a class="post-nav-back" href="{{ '/' | relative_url }}">All posts</a>
-			{% if page.next %}
-			<a class="post-nav-next" href="{{ page.next.url | relative_url }}" title="{{ page.next.title | escape }}">
-				<span>Next &rarr;</span>
-				<strong>{{ page.next.title }}</strong>
-			</a>
-			{% else %}
-			<div class="post-nav-next"></div>
-			{% endif %}
-		</nav>
+		{% include post-nav.html back_url="/" back_label="All posts" %}
 
 	</div>
 

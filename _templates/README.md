@@ -11,9 +11,10 @@ folders starting with `_` that aren't collections).
 | `review-tv.md` | `_reviews/` | `YYYY-MM-DD-title.md` |
 | `review-game.md` | `_reviews/` | `YYYY-MM-DD-title.md` |
 | `review-gadget.md` | `_reviews/` | `YYYY-MM-DD-title.md` |
+| `note.md` | `_notes/` | `YYYY-MM-DD-short-name.md` |
 
 The filename's date and title become the post's date and web address
-(`/blog/title` or `/review/title`), so pick the title part carefully.
+(`/blog/title`, `/review/title`, or `/note/YYYY-MM-DD-short-name` for notes), so pick the title part carefully.
 
 ## Things that happen on their own
 

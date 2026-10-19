@@ -41,6 +41,16 @@ jobs:
         uses: actions/checkout@v7
       - name: Setup Pages
         uses: actions/configure-pages@v6
+      # Photos uploaded from a phone (e.g. through Pages CMS) skip the pre-commit
+      # hook, so shrink anything oversized before building; the live site and the
+      # social posts that fetch from it never see the full-size file. The "Tidy
+      # images" workflow commits the shrunk copies back to the repo.
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - run: pip install pillow==12.3.0
+      - name: Shrink oversized images
+        run: python _scripts/shrink_images.py
       - name: Build with Jekyll
         # Same builder (and gem versions) GitHub Pages uses for branch deploys;
         # ignores the repo's Gemfile.

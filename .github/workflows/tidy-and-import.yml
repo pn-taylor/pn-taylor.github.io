@@ -1,0 +1,71 @@
+name: Tidy images and import Pixelfed
+
+# Does on GitHub what the pre-commit hook and _scripts/ do locally, so it
+# happens wherever a post comes from (VS Code at work or home, or Pages CMS):
+#  - after a push with images: shrink anything oversized and commit it back
+#  - every 3 hours: copy new Pixelfed posts in as notes (never announced, as
+#    they're already on the fediverse)
+# A commit made here doesn't start other workflows on its own, so this starts
+# a site rebuild itself when it changed anything. Rebuilds started that way
+# don't announce, so nothing is posted twice.
+on:
+  push:
+    branches: ["main"]
+    paths: ["images/**"]
+  schedule:
+    - cron: "23 */3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: tidy-and-import
+  cancel-in-progress: false
+
+jobs:
+  tidy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - run: pip install pillow==12.3.0
+
+      - name: Import new Pixelfed posts
+        if: github.event_name != 'push'
+        run: python _scripts/import_pixelfed.py
+
+      - name: Shrink oversized images
+        run: python _scripts/shrink_images.py
+
+      - name: Commit any changes
+        id: commit
+        run: |
+          git add -A _notes images
+          if git diff --cached --quiet; then
+            echo "Nothing to commit."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          if git diff --cached --name-only | grep -q '^_notes/'; then
+            git commit -m "Import new Pixelfed posts as notes"
+          else
+            git commit -m "Shrink oversized images"
+          fi
+          # Someone may have pushed while this ran
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Rebuild the site
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run jekyll.yml --ref main

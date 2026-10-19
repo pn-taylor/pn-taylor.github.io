@@ -1,0 +1,84 @@
+{% comment %}
+	One note, on the notes page or its own page: {% include note.html note=n %}
+	The note on the left; on the right, a details bar with an icon for what
+	kind of note it is (like the old Writr theme), the date, tags and where it
+	came from. Each part shows only if the note has it, so a note can be a few
+	words, a photo (or a set of them), a video, a link, a quote, or any mix.
+{% endcomment %}
+{% assign n = include.note %}
+{% if n.video %}{% assign kind = "video" %}{% assign icon = "fa-play" %}
+{% elsif n.quote %}{% assign kind = "quote" %}{% assign icon = "fa-quote-left" %}
+{% elsif n.images %}{% assign kind = "photos" %}{% assign icon = "fa-images" %}
+{% elsif n.image %}{% assign kind = "photo" %}{% assign icon = "fa-camera" %}
+{% elsif n.link %}{% assign kind = "link" %}{% assign icon = "fa-link" %}
+{% else %}{% assign kind = "words" %}{% assign icon = "fa-comment" %}{% endif %}
+<article class="note note--{{ kind }}"{% if include.hidden %} hidden{% endif %}>
+
+	<div class="note__body">
+
+		{% assign text = n.content | strip %}
+		{% if text != "" %}
+		<div class="note__text">{{ n.content }}</div>
+		{% endif %}
+
+		{% if n.quote %}
+		<blockquote class="note__quote">
+			<p>{{ n.quote }}</p>
+			{% if n.cite %}<cite>{{ n.cite }}</cite>{% endif %}
+		</blockquote>
+		{% endif %}
+
+		{% if n.link %}
+		{% assign domain = n.link | split: "/" | slice: 2 | first | remove_first: "www." %}
+		<a class="note__link" href="{{ n.link }}">
+			<strong>{{ n.link_title | default: domain }}</strong>
+			<span>{{ domain }} &nearr;</span>
+		</a>
+		{% endif %}
+
+		{% if n.video %}
+		{% include video-embed.html url=n.video title=n.title %}
+		{% endif %}
+
+		{% if n.image %}
+		<figure class="note__image">
+			<a class="js-photo" href="{{ n.image | relative_url }}"><img src="{{ n.image | relative_url }}" alt="{{ n.alt | escape }}" loading="lazy"></a>
+		</figure>
+		{% endif %}
+
+		{% if n.images %}
+		{% comment %}
+			Rows of three, with the first photo or two made bigger so the last row
+			is never left half empty: 10 photos = one wide + three rows of three.
+		{% endcomment %}
+		{% assign count = n.images.size %}
+		{% assign leftover = count | modulo: 3 %}
+		{% if count == 2 or count == 4 %}{% assign layout = "pairs" %}{% elsif leftover == 1 %}{% assign layout = "lead-1" %}{% elsif leftover == 2 %}{% assign layout = "lead-2" %}{% else %}{% assign layout = "threes" %}{% endif %}
+		{% assign odd = count | modulo: 2 %}
+		<div class="note__gallery note__gallery--{{ layout }}{% if odd == 1 %} note__gallery--odd{% endif %}">
+			{% for photo in n.images %}
+			<a class="js-photo" href="{{ photo.src | relative_url }}"><img src="{{ photo.src | relative_url }}" alt="{{ photo.alt | escape }}" loading="lazy"></a>
+			{% endfor %}
+		</div>
+		{% endif %}
+
+	</div>
+
+	<aside class="note__details">
+		<span class="note__kind" title="{{ kind | capitalize }}"><i class="fas {{ icon }}" aria-hidden="true"></i></span>
+		<a class="note__date" href="{{ n.url | relative_url }}"><time datetime="{{ n.date | date_to_xmlschema }}">{% include ordinal-day.html date=n.date %} {{ n.date | date: "%b %Y" }}</time></a>
+		{% if n.tags.size > 0 %}
+		<p class="note__tags">
+			{% for tag in n.tags %}
+			<a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a>
+			{% endfor %}
+		</p>
+		{% endif %}
+		{% if n.source contains "pixelfed" %}
+		<a class="note__via" href="{{ n.source }}">via Pixelfed</a>
+		{% elsif n.source %}
+		<a class="note__via" href="{{ n.source }}">original</a>
+		{% endif %}
+	</aside>
+
+</article>

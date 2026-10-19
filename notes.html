@@ -1,0 +1,44 @@
+---
+layout: default
+title: Notes
+permalink: /notes/
+description: Snaps, links and passing thoughts. My own little social feed, basically.
+featured_image: /images/demo/demo-landscape.jpg
+---
+
+<section class="intro">
+
+	<div class="wrap">
+
+		<h1>Notes</h1>
+		<p>Snaps, links and passing thoughts. My own little social feed, basically.</p>
+
+	</div>
+
+</section>
+
+<section class="single">
+
+	<div class="wrap notes">
+
+		{% comment %}
+			Every note is in the page, but only the first few show; the script in
+			default.html reveals more as you near the bottom (or press the button).
+		{% endcomment %}
+		{% assign notes = site.notes | sort: "date" | reverse %}
+		{% for n in notes %}
+		{% if forloop.index > 5 %}{% include note.html note=n hidden=true %}{% else %}{% include note.html note=n %}{% endif %}
+		{% else %}
+		<p>Nothing here yet.</p>
+		{% endfor %}
+
+		{% if notes.size > 5 %}
+		<button type="button" class="button notes-more js-notes-more">Show more</button>
+		<noscript><style>.note[hidden] { display: block; } .notes-more { display: none; }</style></noscript>
+		{% endif %}
+
+	</div>
+
+</section>
+
+{% include back-to-top.html %}

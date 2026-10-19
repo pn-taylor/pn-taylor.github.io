@@ -1,4 +1,8 @@
 site: For Pete's Sake
+# Shown on notes, and as the author in the feeds
+author:
+  name: Peter Taylor
+  avatar: /images/blog_images/avatar.jpg
 
 url: https://www.pntaylor.net
 baseurl: 
@@ -16,6 +20,9 @@ collections:
   reviews:
     output: true
     permalink: /review/:slug
+  notes:
+    output: true
+    permalink: /note/:name
 
 defaults:
   -
@@ -48,6 +55,13 @@ defaults:
     values:
       layout: "review"
       featured_image: /images/demo/demo-portrait.jpg
+  -
+    scope:
+      path: ""
+      type: "notes"
+    values:
+      layout: "note"
+      featured_image: /images/demo/demo-landscape.jpg
 
 markdown: kramdown
 
@@ -65,11 +79,13 @@ plugins:
   - jemoji
   - jekyll-redirect-from
 paginate: 6
-# Reviews get their own feed at /feed/reviews.xml (the main feed is blog posts)
+# Reviews and notes get their own feeds (the main feed is blog posts)
 feed:
   collections:
     reviews:
       path: "/feed/reviews.xml"
+    notes:
+      path: "/feed/notes.xml"
 # Used for link previews when pages are shared (see _layouts/default.html)
 social:
   twitter: pntaylor
