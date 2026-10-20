@@ -1,6 +1,6 @@
 ---
 title: Getting Older
-date: 2026-10-20
+date: 2026-10-20 21:30:05 +1100
 tags:
   - life
   - birthdays
