@@ -33,10 +33,13 @@ contact_settings:
   send_button_text: 'Send Message'
 
 social_settings:
-  facebook_url: ''
   mastodon_url: 'https://aus.social/@pntaylor'
+  bluesky_url: 'https://bsky.app/profile/pntaylor.bsky.social'
+  threads_url: 'https://www.threads.com/@pntaylor'
   pixelfed_url: 'https://pixelfed.social/pntaylor'
-  twitter_url: 'https://www.twitter.com/pntaylor'
+  github_url: 'https://github.com/pn-taylor'
+  linkedin_url: 'https://www.linkedin.com/in/pntaylor/'
+  facebook_url: ''
   instagram_url: ''
   snapchat_url: ''
   youtube_url: ''
@@ -52,15 +55,13 @@ social_settings:
   dribbble_url: ''
   behance_url: ''
   deviantart_url: ''
-  github_url: 'https://github.com/pn-taylor'
   reddit_url: ''
-  flickr_url: 'https://www.flickr.com/photos/s33r/'
+  flickr_url: ''
   etsy_url: ''
   kickstarter_url: ''
   soundcloud_url: ''
   spotify_url: ''
   bandcamp_url: ''
-  linkedin_url: 'https://www.linkedin.com/in/pntaylor/'
 
 color_settings:
   background_color: '#ffffff'
