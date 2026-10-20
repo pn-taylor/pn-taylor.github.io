@@ -88,7 +88,6 @@ feed:
       path: "/feed/notes.xml"
 # Used for link previews when pages are shared (see _layouts/default.html)
 social:
-  twitter: pntaylor
   fediverse: "@pntaylor@aus.social"
   default_image: /images/blog_images/me.jpg
 paginate_path: "/blog/page:num/"
