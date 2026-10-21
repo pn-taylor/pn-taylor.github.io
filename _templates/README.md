@@ -25,7 +25,8 @@ The filename's date and title become the post's date and web address
   about 00:05 Canberra time on that day.
 - **Excerpt**: the first paragraph is used automatically. Only add `excerpt:` if the
   post starts with a heading or image, or you want a different summary.
-- **Images**: anything over 1 MB or 2000px is shrunk after you push, and an image whose
+- **Images**: after you push, photo metadata (including a phone's GPS location) is
+  stripped, anything over 1 MB or 2000px is shrunk, and an image whose
   contents don't match its extension (e.g. a WebP saved as .jpg) is converted.
 
 ## Review fields

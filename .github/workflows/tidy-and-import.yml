@@ -2,7 +2,8 @@ name: Tidy images and import Pixelfed
 
 # Tidies up after every push, wherever a post comes from (VS Code at work or
 # home, or Pages CMS), and commits any changes back (so pull before editing):
-#  - images: shrink anything oversized
+#  - images: shrink anything oversized, and strip photo metadata such as the
+#    GPS location a phone adds
 #  - new posts, reviews and notes dated today: add the time they were pushed
 #    (Pages CMS can only write the date), and file any note at the top of
 #    _notes/ into its year folder
@@ -55,7 +56,7 @@ jobs:
       - name: File notes into year folders
         run: python _scripts/file_notes_by_year.py
 
-      - name: Shrink oversized images
+      - name: Shrink images and strip their metadata
         run: python _scripts/shrink_images.py
 
       - name: Commit any changes
@@ -74,7 +75,7 @@ jobs:
           elif git diff --cached --name-only | grep -qE '^_(posts|reviews|notes)/'; then
             git commit -m "Add times to new posts"
           else
-            git commit -m "Shrink oversized images"
+            git commit -m "Shrink images and strip their metadata"
           fi
           # Someone may have pushed while this ran
           git pull --rebase origin main
