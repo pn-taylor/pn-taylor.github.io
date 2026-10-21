@@ -8,7 +8,7 @@ photos copied to images/notes/pixelfed/ so they stay on the site whatever
 happens to the Pixelfed post. Posts already imported (matched by `pixelfed_id`
 in a note's front matter) are skipped, so it's safe to run again and only picks
 up new ones. A note still pointing at a photo on Pixelfed gets its own copy.
-Run _scripts/shrink_images.py afterwards, or let the pre-commit hook do it.
+The "Tidy images and import Pixelfed" workflow shrinks the photos afterwards.
 
 Uses the endpoint Pixelfed's own profile page reads, which needs no login.
 """

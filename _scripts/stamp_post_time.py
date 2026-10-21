@@ -1,17 +1,16 @@
 """Give new posts, reviews and notes dated today the time they were committed.
 
 Usage:
-  python3 _scripts/stamp_post_time.py --staged   (used by .githooks/pre-commit)
   python3 _scripts/stamp_post_time.py --added BEFORE AFTER
-      (used by the "Tidy images and import Pixelfed" workflow) the same for
-      files added between two commits, e.g. a note from Pages CMS, timed by
-      the commit that added each one. Pages CMS can only write the date: the
-      time it writes is labelled UTC, which Jekyll takes as hours in the future.
+      (used by the "Tidy images and import Pixelfed" workflow) for files added
+      between two commits, each timed by the commit that added it. Pages CMS
+      can only write the date: the time it writes is labelled UTC, which
+      Jekyll takes as hours in the future.
 
 Without a time Jekyll dates a post at midnight, and that's what link previews
-(e.g. the "14h ago" on a Mastodon card) show. So when a newly added post or
-review is dated today and has no time, this writes `date:` with the current
-time into its front matter and re-stages it.
+(e.g. the "14h ago" on a Mastodon card) show. So when a newly added post,
+review or note is dated today and has no time, this writes `date:` with the
+time it was committed into its front matter.
 
 Left alone: posts dated in the future (they go live at the 00:05 rebuild, so
 midnight is right) or in the past, posts that already have a time, and posts
@@ -36,14 +35,6 @@ def site_timezone():
     # Read just the one setting, so the hook doesn't need PyYAML.
     match = re.search(r"^timezone:\s*['\"]?([\w/+-]+)", Path("_config.yml").read_text(encoding="utf-8"), re.M)
     return ZoneInfo(match.group(1) if match else "UTC")
-
-
-def added_posts():
-    out = subprocess.run(
-        ["git", "diff", "--cached", "--name-only", "--diff-filter=A", "-z"],
-        capture_output=True, text=True, check=True,
-    ).stdout
-    return [Path(p) for p in out.split("\0") if p.startswith(FOLDERS) and p.endswith(EXTENSIONS)]
 
 
 def added_between(before, after):
@@ -91,18 +82,12 @@ def stamp(path, now):
 
 
 def main(args):
-    if len(args) == 3 and args[0] == "--added":
-        tz = site_timezone()
-        for p in added_between(args[1], args[2]):
-            if p.is_file():
-                stamp(p, committed_at(p, tz))
-        return
-    if args != ["--staged"]:
+    if len(args) != 3 or args[0] != "--added":
         sys.exit(__doc__)
-    now = datetime.now(site_timezone()).replace(microsecond=0)
-    changed = [p for p in added_posts() if p.is_file() and stamp(p, now)]
-    if changed:
-        subprocess.run(["git", "add", "--", *map(str, changed)], check=True)
+    tz = site_timezone()
+    for p in added_between(args[1], args[2]):
+        if p.is_file():
+            stamp(p, committed_at(p, tz))
 
 
 if __name__ == "__main__":

@@ -4,8 +4,6 @@ each image really is the format its extension says.
 Usage:
   python3 _scripts/shrink_images.py [FILE ...]   shrink the given files
   python3 _scripts/shrink_images.py              shrink everything under images/
-  python3 _scripts/shrink_images.py --staged     shrink staged images and re-stage
-                                                 them (used by .githooks/pre-commit)
 
 An image is processed when its longest edge is over MAX_EDGE or the file is
 over MAX_BYTES. Files keep their names, so posts don't need changing. EXIF
@@ -15,11 +13,10 @@ A file is only replaced if the new version is smaller.
 An image whose contents don't match its extension (e.g. an AVIF or WebP saved
 as .jpg) is always converted to the right format, since browsers cope but link
 previews on Mastodon and friends don't. Files Pillow can't read at all (e.g.
-HEIC) are reported, and in --staged mode the commit is stopped.
+HEIC) are reported and the run fails.
 """
 
 import io
-import subprocess
 import sys
 from pathlib import Path
 
@@ -73,19 +70,8 @@ def shrink(path):
     return True
 
 
-def staged_images():
-    out = subprocess.run(
-        ["git", "diff", "--cached", "--name-only", "--diff-filter=AM", "-z"],
-        capture_output=True, text=True, check=True,
-    ).stdout
-    return [Path(p) for p in out.split("\0") if p]
-
-
 def main(args):
-    staged = args == ["--staged"]
-    if staged:
-        paths = staged_images()
-    elif args:
+    if args:
         paths = [Path(a) for a in args]
     else:
         paths = sorted(Path("images").rglob("*"))
@@ -101,9 +87,6 @@ def main(args):
             print(f"  ERROR  {p}: not a readable image (HEIC? corrupt?); re-export it as a real {p.suffix} file")
             unreadable.append(p)
 
-    if staged and changed:
-        subprocess.run(["git", "add", "--", *map(str, changed)], check=True)
-        print(f"Fixed and re-staged {len(changed)} image(s).")
     if unreadable:
         sys.exit(1)
 

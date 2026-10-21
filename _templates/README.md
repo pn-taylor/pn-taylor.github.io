@@ -18,13 +18,14 @@ The filename's date and title become the post's date and web address
 
 ## Things that happen on their own
 
-- **Time of day**: when you commit a new post dated today, the pre-commit hook adds
-  the current time to `date:`. Leave `date:` out, or date-only, and it's handled.
+- **Time of day**: when you push a new post dated today, a GitHub workflow adds the
+  time it was committed to `date:` and commits that back, so pull before editing it
+  again. Leave `date:` out, or date-only, and it's handled.
 - **Future dates**: a post dated in the future goes live (and is announced) at
   about 00:05 Canberra time on that day.
 - **Excerpt**: the first paragraph is used automatically. Only add `excerpt:` if the
   post starts with a heading or image, or you want a different summary.
-- **Images**: anything over 1 MB or 2000px is shrunk on commit, and an image whose
+- **Images**: anything over 1 MB or 2000px is shrunk after you push, and an image whose
   contents don't match its extension (e.g. a WebP saved as .jpg) is converted.
 
 ## Review fields

@@ -5,3 +5,4 @@ vendor/
 .bundle/
 bazzite.md
 Gemfile.lock
+__pycache__/

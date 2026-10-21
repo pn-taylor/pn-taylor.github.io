@@ -1,11 +1,11 @@
 name: Tidy images and import Pixelfed
 
-# Does on GitHub what the pre-commit hook and _scripts/ do locally, so it
-# happens wherever a post comes from (VS Code at work or home, or Pages CMS):
-#  - after a push with images: shrink anything oversized and commit it back
-#  - after a push with new notes: add the time they were posted (Pages CMS
-#    can only write the date), file any at the top of _notes/ into their year
-#    folder, and commit it back
+# Tidies up after every push, wherever a post comes from (VS Code at work or
+# home, or Pages CMS), and commits any changes back (so pull before editing):
+#  - images: shrink anything oversized
+#  - new posts, reviews and notes dated today: add the time they were pushed
+#    (Pages CMS can only write the date), and file any note at the top of
+#    _notes/ into its year folder
 #  - every 3 hours: copy new Pixelfed posts in as notes (never announced, as
 #    they're already on the fediverse)
 # A commit made here doesn't start other workflows on its own, so this starts
@@ -15,7 +15,7 @@ name: Tidy images and import Pixelfed
 on:
   push:
     branches: ["main"]
-    paths: ["images/**", "_notes/**"]
+    paths: ["images/**", "_posts/**", "_reviews/**", "_notes/**"]
   schedule:
     - cron: "23 */3 * * *"
   workflow_dispatch:
@@ -61,7 +61,7 @@ jobs:
       - name: Commit any changes
         id: commit
         run: |
-          git add -A _notes images
+          git add -A _posts _reviews _notes images
           if git diff --cached --quiet; then
             echo "Nothing to commit."
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -71,8 +71,8 @@ jobs:
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
           if git diff --cached --name-only --diff-filter=A | grep -q '^_notes/'; then
             git commit -m "Import new Pixelfed posts as notes"
-          elif git diff --cached --name-only | grep -q '^_notes/'; then
-            git commit -m "Add times to new notes, file them by year"
+          elif git diff --cached --name-only | grep -qE '^_(posts|reviews|notes)/'; then
+            git commit -m "Add times to new posts"
           else
             git commit -m "Shrink oversized images"
           fi
