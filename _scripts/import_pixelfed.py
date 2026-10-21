@@ -3,7 +3,7 @@
 Usage:
   python3 _scripts/import_pixelfed.py
 
-Each public Pixelfed post becomes _notes/YYYY-MM-DD-some-words.md, with its
+Each public Pixelfed post becomes _notes/YYYY/YYYY-MM-DD-some-words.md, with its
 photos copied to images/notes/pixelfed/ so they stay on the site whatever
 happens to the Pixelfed post. Posts already imported (matched by `pixelfed_id`
 in a note's front matter) are skipped, so it's safe to run again and only picks
@@ -53,7 +53,7 @@ def fetch_posts():
 
 def imported_ids():
     found = set()
-    for path in NOTES.glob("*.md"):
+    for path in NOTES.rglob("*.md"):
         match = re.search(r'^pixelfed_id: "?(\d+)"?$', path.read_text(), re.M)
         if match:
             found.add(match.group(1))
@@ -108,7 +108,7 @@ def photos(post):
 
 def localise_existing():
     """Give notes that still point at photos on Pixelfed their own copies."""
-    for path in sorted(NOTES.glob("*.md")):
+    for path in sorted(NOTES.rglob("*.md")):
         text = path.read_text()
         match = re.search(r'^pixelfed_id: "?(\d+)"?$', text, re.M)
         remote = re.findall(r"^(?:image:|  - src:) (https?://\S+)$", text, re.M)
@@ -124,10 +124,12 @@ def write_note(post, found):
     created = datetime.fromisoformat(post["created_at"].replace("Z", "+00:00")).astimezone(TIMEZONE)
     text, tags = caption_and_tags(post)
     title, slug = title_and_slug(text)
-    path = NOTES / f"{created:%Y-%m-%d}-{slug}.md"
+    folder = NOTES / f"{created:%Y}"
+    folder.mkdir(parents=True, exist_ok=True)
+    path = folder / f"{created:%Y-%m-%d}-{slug}.md"
     n = 2
     while path.exists():
-        path = NOTES / f"{created:%Y-%m-%d}-{slug}-{n}.md"
+        path = folder / f"{created:%Y-%m-%d}-{slug}-{n}.md"
         n += 1
 
     # json.dumps gives a double-quoted string, which is also valid YAML

@@ -20,7 +20,10 @@ content:
     label: Notes
     type: collection
     path: _notes
-    filename: "{year}-{month}-{day}-{primary}.md"
+    # Into a year folder, like the blog posts ({year} is the year it's saved,
+    # not the note's date). The "Tidy images" workflow moves any that land at
+    # the top of _notes anyway.
+    filename: "{year}/{year}-{month}-{day}-{primary}.md"
     view:
       fields: [title, date]
       primary: title

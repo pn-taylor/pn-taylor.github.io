@@ -4,7 +4,8 @@ name: Tidy images and import Pixelfed
 # happens wherever a post comes from (VS Code at work or home, or Pages CMS):
 #  - after a push with images: shrink anything oversized and commit it back
 #  - after a push with new notes: add the time they were posted (Pages CMS
-#    can only write the date) and commit it back
+#    can only write the date), file any at the top of _notes/ into their year
+#    folder, and commit it back
 #  - every 3 hours: copy new Pixelfed posts in as notes (never announced, as
 #    they're already on the fediverse)
 # A commit made here doesn't start other workflows on its own, so this starts
@@ -51,6 +52,9 @@ jobs:
         if: github.event_name == 'push'
         run: python _scripts/stamp_post_time.py --added "${{ github.event.before }}" "${{ github.sha }}"
 
+      - name: File notes into year folders
+        run: python _scripts/file_notes_by_year.py
+
       - name: Shrink oversized images
         run: python _scripts/shrink_images.py
 
@@ -68,7 +72,7 @@ jobs:
           if git diff --cached --name-only --diff-filter=A | grep -q '^_notes/'; then
             git commit -m "Import new Pixelfed posts as notes"
           elif git diff --cached --name-only | grep -q '^_notes/'; then
-            git commit -m "Add times to new notes"
+            git commit -m "Add times to new notes, file them by year"
           else
             git commit -m "Shrink oversized images"
           fi
