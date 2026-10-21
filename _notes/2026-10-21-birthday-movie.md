@@ -1,6 +1,6 @@
 ---
 title: Birthday Movie
-date: 2026-10-21
+date: 2026-10-21 19:45:26 +1100
 image: /images/notes/thelaststarfighterposter2000x3000uaa.jpg
 alt: Movie poster for The Last Starfighter
 tags:
