@@ -17,6 +17,7 @@ import json
 import re
 import sys
 import time
+import urllib.error
 import urllib.request
 from datetime import datetime
 from pathlib import Path
@@ -144,7 +145,25 @@ def write_note(post, found):
     return path
 
 
+def unavailable(err):
+    """True if Pixelfed is down or busy (try again next run), rather than
+    something that needs fixing here, like a changed API or a missing account."""
+    if isinstance(err, urllib.error.HTTPError):
+        return err.code == 429 or err.code >= 500
+    return isinstance(err, (urllib.error.URLError, TimeoutError, ConnectionError))
+
+
 def main():
+    try:
+        run()
+    except Exception as err:
+        if not unavailable(err):
+            raise
+        # A warning on the run instead of a failure; the next run catches up
+        print(f"::warning::{INSTANCE} is unavailable ({err}), skipping the import this time")
+
+
+def run():
     localise_existing()
     done = imported_ids()
     added = 0

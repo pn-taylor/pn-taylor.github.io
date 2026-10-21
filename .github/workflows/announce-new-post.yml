@@ -1,7 +1,15 @@
 name: Announce new post
 
 on:
-  # Called by jekyll.yml after each successful deploy (push or daily schedule).
+  # Runs on its own push rather than from the deploy that push starts: if that
+  # deploy is still queued when another starts (say the one "Tidy images"
+  # starts after stamping a note's time), GitHub cancels it, and the new
+  # post would never go out. The "wait" step below holds off until whichever
+  # deploy it is has put the post live.
+  push:
+    branches: ["main"]
+    paths: ["_posts/**", "_reviews/**", "_notes/**"]
+  # Called by jekyll.yml after its daily scheduled deploy, for posts dated today.
   workflow_call:
   workflow_dispatch:
     inputs:
@@ -21,8 +29,9 @@ on:
 permissions:
   contents: read
 
+# One run per commit; a shared group would cancel queued runs the same way
 concurrency:
-  group: announce-new-post
+  group: announce-new-post-${{ github.sha }}
   cancel-in-progress: false
 
 jobs:

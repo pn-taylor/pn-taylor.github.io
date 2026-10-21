@@ -8,8 +8,9 @@ name: Tidy images and import Pixelfed
 #  - every 3 hours: copy new Pixelfed posts in as notes (never announced, as
 #    they're already on the fediverse)
 # A commit made here doesn't start other workflows on its own, so this starts
-# a site rebuild itself when it changed anything. Rebuilds started that way
-# don't announce, so nothing is posted twice.
+# a site rebuild itself when it changed anything. New posts are announced by
+# their own push (see announce-new-post.yml), whichever rebuild puts them live.
+# A Pixelfed outage only leaves a warning on the run; the next one catches up.
 on:
   push:
     branches: ["main"]

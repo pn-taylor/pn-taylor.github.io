@@ -74,11 +74,11 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v5
 
-  # Post newly published posts to Bluesky, Mastodon and Threads, once they're live
+  # Post posts dated today to Bluesky, Mastodon and Threads, once they're live.
+  # New posts pushed straight to main are posted by "Announce new post" itself.
   announce:
     needs: deploy
-    # Manual site rebuilds don't announce; use the "Announce new post" workflow.
-    if: github.event_name != 'workflow_dispatch'
+    if: github.event_name == 'schedule'
     uses: ./.github/workflows/announce-new-post.yml
     permissions:
       contents: read
