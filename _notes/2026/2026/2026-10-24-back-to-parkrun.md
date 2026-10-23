@@ -1,6 +1,6 @@
 ---
 title: Back to Parkrun
-date: 2026-10-24
+date: 2026-10-24 09:34:37 +1100
 image: /images/notes/1792793512810-1.png
 alt: Picture showing run details, 5.15km distance, speed 7:16/km time 37m 28s
 tags:
