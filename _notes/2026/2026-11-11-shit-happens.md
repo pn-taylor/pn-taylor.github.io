@@ -1,6 +1,6 @@
 ---
 title: Shit Happens
-date: 2026-11-11
+date: 2026-11-11 17:02:19 +1100
 quote: Anything that happens, happens. Anything that, in happening, causes
   something else to happen causes something else to happen. Anything that, in
   happening, causes itself to happen happens again. All of this, however,
